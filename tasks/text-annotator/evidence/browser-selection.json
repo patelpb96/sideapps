@@ -1,0 +1,12 @@
+{
+  "firstSelection": "Second",
+  "firstMenuVisible": true,
+  "secondSelection": "paragraph",
+  "secondMenuVisible": true,
+  "annotations": 2,
+  "marks": 2,
+  "markTexts": ["Second", "paragraph"],
+  "status": "Person annotation added.",
+  "state": "success",
+  "note": "The second selection was made after the first annotation created a mark, so the offset walker had multiple text nodes."
+}

@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "title": "Plan gate — iterative review, then human escalation",
+  "width": 1660,
+  "height": 570,
+  "lanes": [
+    { "id": "author", "name": "Plan author", "kind": "agent", "y": 34, "height": 140 },
+    { "id": "reviewer", "name": "Different reviewer", "kind": "agent", "y": 182, "height": 100 },
+    { "id": "argon", "name": "Argon (permission)", "kind": "agent", "y": 290, "height": 110 },
+    { "id": "user", "name": "User", "kind": "human", "y": 408, "height": 140 }
+  ],
+  "nodes": [
+    {
+      "id": "p0", "primitive": "trigger-manual", "label": "Plan requested under the agreed scope",
+      "lane": "author", "x": 60, "y": 56, "w": 240, "h": 66, "props": { "actor": "Host" }
+    },
+    {
+      "id": "p1", "primitive": "agent", "label": "Author drafts the plan",
+      "lane": "author", "x": 360, "y": 56, "w": 240, "h": 66,
+      "props": { "actor": "One eligible agent", "scope": "no code; proposal only" }
+    },
+    {
+      "id": "p2", "primitive": "review", "label": "Different agent reviews the plan",
+      "lane": "reviewer", "x": 680, "y": 204, "w": 260, "h": 66,
+      "props": { "actor": "The other eligible model", "why": "no self-review" }
+    },
+    {
+      "id": "p4", "primitive": "loop", "label": "Back to plan: revise + re-review (≤3)",
+      "lane": "author", "x": 1040, "y": 56, "w": 280, "h": 66,
+      "props": { "until": "Argon accepts or 3rd denial", "max": "3 Argon plan reviews", "returns_to": "plan review (p2)" }
+    },
+    {
+      "id": "p3", "primitive": "approval", "label": "Argon: plan gate",
+      "lane": "argon", "x": 1040, "y": 306, "w": 250, "h": 80,
+      "props": {
+        "binds": "scope, owners, acceptance criteria",
+        "on_findings": "revise + re-review; up to 3 Argon rounds",
+        "after_3": "escalate to user",
+        "hard_stop": "critical security/runtime only"
+      }
+    },
+    {
+      "id": "p7", "primitive": "handoff", "label": "Plan allowed; backend may start",
+      "lane": "author", "x": 1380, "y": 56, "w": 230, "h": 66, "props": {}
+    },
+    {
+      "id": "p6", "primitive": "error", "label": "STOP: critical only",
+      "lane": "user", "x": 1040, "y": 430, "w": 220, "h": 66,
+      "props": { "why": "major security or runtime issue; preserve evidence" }
+    },
+    {
+      "id": "p5", "primitive": "escalate", "label": "Escalate: 3rd plan denial",
+      "lane": "user", "x": 1380, "y": 430, "w": 230, "h": 66,
+      "props": { "actor": "User", "why": "three Argon rounds did not converge" }
+    }
+  ],
+  "edges": [
+    { "id": "e1", "kind": "sequence", "label": "", "from": "p0", "to": "p1", "fromPort": "out" },
+    { "id": "e2", "kind": "sequence", "label": "", "from": "p1", "to": "p2", "fromPort": "out" },
+    { "id": "e3", "kind": "sequence", "label": "", "from": "p2", "to": "p3", "fromPort": "out" },
+    { "id": "e4", "kind": "sequence", "label": "allow", "from": "p3", "to": "p7", "fromPort": "true" },
+    { "id": "e5", "kind": "loop", "label": "findings", "from": "p3", "to": "p4", "fromPort": "false" },
+    { "id": "e6", "kind": "error", "label": "critical", "from": "p3", "to": "p6", "fromPort": "error" },
+    { "id": "e7", "kind": "loop", "label": "", "from": "p4", "to": "p2", "fromPort": "out" },
+    { "id": "e8", "kind": "error", "label": "3rd denial", "from": "p4", "to": "p5", "fromPort": "error" }
+  ],
+  "meta": {
+    "source": "program-factory design; iterative plan gate",
+    "interpreter": "authored-manual-layout"
+  }
+}

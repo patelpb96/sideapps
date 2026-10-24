@@ -1,0 +1,34 @@
+✔ upload, list, read, annotate and delete (92.5587ms)
+✔ invalid annotations are rejected with 422 (28.5338ms)
+✔ unsupported, empty and oversized uploads fail clearly (12.0009ms)
+✔ static page and assets are served (10.6468ms)
+✔ missing document and malformed JSON are handled (13.3102ms)
+✔ txt extracts paragraphs and exact offsets (5.582ms)
+✔ markdown is treated as plain text (1.4186ms)
+✔ txt strips a BOM and normalizes CRLF (0.4196ms)
+✔ docx extracts paragraphs from word/document.xml (1.8269ms)
+✔ pdf extracts an existing text layer (44.7067ms)
+✔ empty text returns NO_TEXT (2.3082ms)
+✔ textless docx returns NO_TEXT (1.3289ms)
+✔ blank pdf returns NO_TEXT (45.0434ms)
+✔ unsupported format returns UNSUPPORTED_FORMAT (0.4609ms)
+✔ a corrupt docx returns EXTRACT_FAILED (0.2976ms)
+✔ store saves, gets, lists and deletes a document (13.5126ms)
+✔ store saves and reads annotations (15.2376ms)
+✔ store rejects a traversal-shaped id (2.0807ms)
+✔ LABELS is the V1 label set (1.0239ms)
+✔ valid annotations produce no errors (0.2495ms)
+✔ unknown label is rejected (0.245ms)
+✔ out-of-bounds and inverted spans are rejected (0.1468ms)
+✔ text mismatch is rejected (0.1173ms)
+✔ overlapping spans are rejected even when unsorted (0.2368ms)
+✔ touching spans are allowed (0.1677ms)
+✔ non-array input is rejected (0.1642ms)
+ℹ tests 26
+ℹ suites 0
+ℹ pass 26
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 281.9034

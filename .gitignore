@@ -1,0 +1,36 @@
+# Runtime task state; written by the host, never by workers.
+board/
+
+# Local scratch and logs.
+.scratch/
+*.log
+*.tmp
+
+# Secrets and local environment.
+.env
+.env.*
+!.env.example
+*.secret
+*.token
+*.pem
+*.key
+
+# OS and editor noise.
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Build and test output.
+node_modules/
+dist/
+build/
+coverage/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Per-app runtime data.
+apps/*/data/

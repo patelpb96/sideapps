@@ -1,0 +1,10 @@
+* text=auto eol=lf
+
+# Binary fixtures and evidence.
+*.pdf binary
+*.docx binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.zip binary

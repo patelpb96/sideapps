@@ -1,0 +1,599 @@
+{
+  "version": 1,
+  "title": "Program factory — backend first, then frontend",
+  "lanes": [
+    {
+      "id": "user",
+      "name": "User",
+      "kind": "human"
+    },
+    {
+      "id": "team",
+      "name": "Four agents",
+      "kind": "agent"
+    },
+    {
+      "id": "argon",
+      "name": "Argon (permission)",
+      "kind": "agent"
+    },
+    {
+      "id": "host",
+      "name": "Host / broker",
+      "kind": "system"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "u0",
+      "primitive": "trigger-manual",
+      "label": "Brief + scope + budget",
+      "lane": "user",
+      "props": {
+        "actor": "User"
+      }
+    },
+    {
+      "id": "t0",
+      "primitive": "agent",
+      "label": "All four share needs, ideas, acceptance",
+      "lane": "team",
+      "props": {
+        "actor": "B1, B2, F1, F2",
+        "budget": "2 proposals + 1 objection per decision"
+      }
+    },
+    {
+      "id": "t1",
+      "primitive": "decision",
+      "label": "Contract + task split agreed?",
+      "lane": "team",
+      "props": {
+        "condition": "no silence; a NACK or missed deadline blocks"
+      }
+    },
+    {
+      "id": "block-a",
+      "primitive": "escalate",
+      "label": "Block: user resolves",
+      "lane": "user",
+      "props": {
+        "actor": "User",
+        "why": "timeout, repeated objection, or NACK"
+      }
+    },
+    {
+      "id": "t2",
+      "primitive": "review",
+      "label": "Plan: one author, different reviewer",
+      "lane": "team",
+      "props": {
+        "actor": "Two different eligible models"
+      }
+    },
+    {
+      "id": "a0",
+      "primitive": "approval",
+      "label": "Argon: plan gate",
+      "lane": "argon",
+      "props": {
+        "binds": "exact scope, owners, acceptance",
+        "on_findings": "revise + re-review",
+        "max": "3 Argon plan reviews",
+        "after_3": "escalate to user",
+        "hard_stop": "critical security/runtime only"
+      }
+    },
+    {
+      "id": "stop-a",
+      "primitive": "error",
+      "label": "STOP: critical only",
+      "lane": "argon",
+      "props": {
+        "why": "major security or runtime issue only"
+      }
+    },
+    {
+      "id": "t3",
+      "primitive": "agent",
+      "label": "Backend pair: contract, primitives, tests",
+      "lane": "team",
+      "props": {
+        "actor": "B1 author / B2 reviewer (DeepSeek Flash max)",
+        "why": "frontend code is blocked until the contract is ready"
+      }
+    },
+    {
+      "id": "h0",
+      "primitive": "subprocess",
+      "label": "Per patch: candidate tests in isolated scratch",
+      "lane": "host",
+      "props": {
+        "actor": "Host test runner",
+        "scope": "target tree unchanged until approval"
+      }
+    },
+    {
+      "id": "a1",
+      "primitive": "approval",
+      "label": "Argon: exact patch gate",
+      "lane": "argon",
+      "props": {
+        "binds": "paths, base, diff hash, test evidence, nonce",
+        "why": "one use; any diff change invalidates it",
+        "on_findings": "revise + re-review",
+        "max": "3 Argon patch reviews",
+        "after_3": "escalate to user",
+        "hard_stop": "critical security/runtime only"
+      }
+    },
+    {
+      "id": "stop-b",
+      "primitive": "error",
+      "label": "STOP: critical only",
+      "lane": "argon",
+      "props": {
+        "why": "major security or runtime issue only"
+      }
+    },
+    {
+      "id": "h1",
+      "primitive": "tool-exec",
+      "label": "Broker applies + verifies",
+      "lane": "host",
+      "props": {
+        "actor": "Deterministic broker",
+        "isolation": "host-enforced; NOT IMPLEMENTED in this design"
+      }
+    },
+    {
+      "id": "stop-v",
+      "primitive": "error",
+      "label": "HALT: preserve state; user decides",
+      "lane": "host",
+      "props": {
+        "why": "runtime mismatch; no silent repair, rollback, or cleanup"
+      }
+    },
+    {
+      "id": "t4",
+      "primitive": "review",
+      "label": "Backend ready: hashes + B1/B2 + F1/F2 ACKs",
+      "lane": "team",
+      "props": {
+        "binds": "backend tree, contract, fixtures, tests, readiness",
+        "why": "both frontend agents ACK the same hashes"
+      }
+    },
+    {
+      "id": "block-r",
+      "primitive": "escalate",
+      "label": "Block: missing ACK or NACK",
+      "lane": "user",
+      "props": {
+        "actor": "User",
+        "why": "readiness is not a message; it is hash-bound evidence"
+      }
+    },
+    {
+      "id": "a2",
+      "primitive": "approval",
+      "label": "Argon: frontend grant",
+      "lane": "argon",
+      "props": {
+        "binds": "exact backend tree + readiness hashes",
+        "on_findings": "fix readiness and re-request",
+        "max": "3 frontend grant requests",
+        "after_3": "escalate to user",
+        "hard_stop": "critical security/runtime only"
+      }
+    },
+    {
+      "id": "stop-f",
+      "primitive": "error",
+      "label": "STOP: critical only",
+      "lane": "argon",
+      "props": {
+        "why": "major security or runtime issue only"
+      }
+    },
+    {
+      "id": "t5",
+      "primitive": "agent",
+      "label": "Frontend pair: UI against frozen contract",
+      "lane": "team",
+      "props": {
+        "actor": "F1 author / F2 reviewer (GPT-6 Luna)"
+      }
+    },
+    {
+      "id": "h2",
+      "primitive": "subprocess",
+      "label": "Per patch + integration tests",
+      "lane": "host",
+      "props": {
+        "actor": "Host test runner",
+        "scope": "same patch gate as backend"
+      }
+    },
+    {
+      "id": "t6",
+      "primitive": "decision",
+      "label": "Contract / gating hash changed?",
+      "lane": "team",
+      "props": {
+        "condition": "fixtures, tests, readiness, backend tree"
+      }
+    },
+    {
+      "id": "t7",
+      "primitive": "loop",
+      "label": "Invalidate ACKs + grants; return to backend rework",
+      "lane": "team",
+      "props": {
+        "until": "backend reworked, re-tested, re-ACKed, new grant",
+        "max": "user resolves scope changes"
+      }
+    },
+    {
+      "id": "a3",
+      "primitive": "approval",
+      "label": "Argon: commit gate",
+      "lane": "argon",
+      "props": {
+        "binds": "root, HEAD, tree, message, ref, identity"
+      }
+    },
+    {
+      "id": "hold-c",
+      "primitive": "error",
+      "label": "HOLD: no commit; work stays local",
+      "lane": "user",
+      "props": {
+        "why": "no commit was approved"
+      }
+    },
+    {
+      "id": "a4",
+      "primitive": "approval",
+      "label": "Argon: push gate",
+      "lane": "argon",
+      "props": {
+        "binds": "URL, one ref, commit, expected remote OID"
+      }
+    },
+    {
+      "id": "hold-p",
+      "primitive": "error",
+      "label": "HOLD: no push; commit stays local",
+      "lane": "user",
+      "props": {
+        "why": "no push was approved"
+      }
+    },
+    {
+      "id": "e0",
+      "primitive": "end",
+      "label": "Done",
+      "lane": "team",
+      "props": {}
+    },
+    {
+      "id": "block-plan",
+      "primitive": "escalate",
+      "label": "Escalate: 3rd plan denial",
+      "lane": "user",
+      "props": {
+        "actor": "User",
+        "why": "the plan is not converging; the user decides"
+      }
+    },
+    {
+      "id": "block-patch",
+      "primitive": "escalate",
+      "label": "Escalate: 3rd patch denial",
+      "lane": "user",
+      "props": {
+        "actor": "User",
+        "why": "the patch is not converging; the user decides"
+      }
+    },
+    {
+      "id": "block-grant",
+      "primitive": "escalate",
+      "label": "Escalate: 3rd grant denial",
+      "lane": "user",
+      "props": {
+        "actor": "User",
+        "why": "readiness or scope is not converging"
+      }
+    },
+    {
+      "id": "revise-plan",
+      "primitive": "loop",
+      "label": "Back to plan: revise + re-review",
+      "lane": "team",
+      "props": {
+        "until": "Argon accepts or 3rd denial",
+        "max": "3 Argon rounds",
+        "returns_to": "plan review (t2)"
+      }
+    },
+    {
+      "id": "revise-patch",
+      "primitive": "loop",
+      "label": "Back to backend: revise + re-review",
+      "lane": "team",
+      "props": {
+        "until": "Argon accepts or 3rd denial",
+        "max": "3 Argon rounds",
+        "returns_to": "backend review (t3)"
+      }
+    },
+    {
+      "id": "revise-grant",
+      "primitive": "loop",
+      "label": "Fix readiness: re-ACK + re-request",
+      "lane": "team",
+      "props": {
+        "until": "Argon accepts or 3rd denial",
+        "max": "3 grant requests",
+        "returns_to": "readiness + ACK (t4)"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "kind": "sequence",
+      "label": "",
+      "from": "u0",
+      "to": "t0",
+      "fromPort": "out"
+    },
+    {
+      "id": "e2",
+      "kind": "sequence",
+      "label": "",
+      "from": "t0",
+      "to": "t1",
+      "fromPort": "out"
+    },
+    {
+      "id": "e3",
+      "kind": "error",
+      "label": "no",
+      "from": "t1",
+      "to": "block-a",
+      "fromPort": "false"
+    },
+    {
+      "id": "e4",
+      "kind": "sequence",
+      "label": "yes",
+      "from": "t1",
+      "to": "t2",
+      "fromPort": "true"
+    },
+    {
+      "id": "e5",
+      "kind": "sequence",
+      "label": "",
+      "from": "t2",
+      "to": "a0",
+      "fromPort": "out"
+    },
+    {
+      "id": "e6",
+      "kind": "error",
+      "label": "critical",
+      "from": "a0",
+      "to": "stop-a",
+      "fromPort": "error"
+    },
+    {
+      "id": "e7",
+      "kind": "sequence",
+      "label": "allow",
+      "from": "a0",
+      "to": "t3",
+      "fromPort": "true"
+    },
+    {
+      "id": "e8",
+      "kind": "sequence",
+      "label": "",
+      "from": "t3",
+      "to": "h0",
+      "fromPort": "out"
+    },
+    {
+      "id": "e9",
+      "kind": "sequence",
+      "label": "",
+      "from": "h0",
+      "to": "a1",
+      "fromPort": "out"
+    },
+    {
+      "id": "e10",
+      "kind": "error",
+      "label": "critical",
+      "from": "a1",
+      "to": "stop-b",
+      "fromPort": "error"
+    },
+    {
+      "id": "e11",
+      "kind": "sequence",
+      "label": "allow",
+      "from": "a1",
+      "to": "h1",
+      "fromPort": "true"
+    },
+    {
+      "id": "e12",
+      "kind": "error",
+      "label": "fail",
+      "from": "h1",
+      "to": "stop-v",
+      "fromPort": "out"
+    },
+    {
+      "id": "e13",
+      "kind": "sequence",
+      "label": "",
+      "from": "h1",
+      "to": "t4",
+      "fromPort": "out"
+    },
+    {
+      "id": "e14",
+      "kind": "error",
+      "label": "no",
+      "from": "t4",
+      "to": "block-r",
+      "fromPort": "false"
+    },
+    {
+      "id": "e15",
+      "kind": "sequence",
+      "label": "yes",
+      "from": "t4",
+      "to": "a2",
+      "fromPort": "true"
+    },
+    {
+      "id": "e16",
+      "kind": "error",
+      "label": "critical",
+      "from": "a2",
+      "to": "stop-f",
+      "fromPort": "error"
+    },
+    {
+      "id": "e17",
+      "kind": "sequence",
+      "label": "allow",
+      "from": "a2",
+      "to": "t5",
+      "fromPort": "true"
+    },
+    {
+      "id": "e18",
+      "kind": "sequence",
+      "label": "",
+      "from": "t5",
+      "to": "h2",
+      "fromPort": "out"
+    },
+    {
+      "id": "e19",
+      "kind": "sequence",
+      "label": "",
+      "from": "h2",
+      "to": "t6",
+      "fromPort": "out"
+    },
+    {
+      "id": "e20",
+      "kind": "loop",
+      "label": "yes",
+      "from": "t6",
+      "to": "t7",
+      "fromPort": "true"
+    },
+    {
+      "id": "e22",
+      "kind": "sequence",
+      "label": "no",
+      "from": "t6",
+      "to": "a3",
+      "fromPort": "false"
+    },
+    {
+      "id": "e23",
+      "kind": "error",
+      "label": "no",
+      "from": "a3",
+      "to": "hold-c",
+      "fromPort": "false"
+    },
+    {
+      "id": "e24",
+      "kind": "sequence",
+      "label": "allow",
+      "from": "a3",
+      "to": "a4",
+      "fromPort": "true"
+    },
+    {
+      "id": "e25",
+      "kind": "error",
+      "label": "no",
+      "from": "a4",
+      "to": "hold-p",
+      "fromPort": "false"
+    },
+    {
+      "id": "e26",
+      "kind": "sequence",
+      "label": "allow",
+      "from": "a4",
+      "to": "e0",
+      "fromPort": "true"
+    },
+    {
+      "id": "e27",
+      "kind": "error",
+      "label": "findings",
+      "from": "a0",
+      "to": "revise-plan",
+      "fromPort": "false"
+    },
+    {
+      "id": "e29",
+      "kind": "error",
+      "label": "3rd denial",
+      "from": "revise-plan",
+      "to": "block-plan",
+      "fromPort": "error"
+    },
+    {
+      "id": "e30",
+      "kind": "error",
+      "label": "findings",
+      "from": "a1",
+      "to": "revise-patch",
+      "fromPort": "false"
+    },
+    {
+      "id": "e32",
+      "kind": "error",
+      "label": "3rd denial",
+      "from": "revise-patch",
+      "to": "block-patch",
+      "fromPort": "error"
+    },
+    {
+      "id": "e33",
+      "kind": "error",
+      "label": "findings",
+      "from": "a2",
+      "to": "revise-grant",
+      "fromPort": "false"
+    },
+    {
+      "id": "e35",
+      "kind": "error",
+      "label": "3rd denial",
+      "from": "revise-grant",
+      "to": "block-grant",
+      "fromPort": "error"
+    }
+  ],
+  "meta": {
+    "source": "program-factory design; backend-first four-agent workflow",
+    "interpreter": "authored"
+  }
+}

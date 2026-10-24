@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1660" height="570" viewBox="0 0 1660 570" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Inter, Roboto, sans-serif">
+<defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#9b9b93"/>
+    </marker>
+    <marker id="arrow-select" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#3b5bdb"/>
+    </marker>
+    <marker id="arrow-danger" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#b42318"/>
+    </marker>
+  </defs>
+<rect width="1660" height="570" fill="#ffffff"/>
+<g class="lane" data-lane="author">
+    <rect x="0" y="34" width="1660" height="140" fill="#fcfcfa" stroke="#d8d8d1" stroke-width="1"/>
+    <rect x="0" y="34" width="196" height="140" fill="#fcfcfa"/>
+    <line x1="196" y1="34" x2="196" y2="174" stroke="#d8d8d1" stroke-width="1" opacity="0.7"/>
+    <text x="18" y="101" font-size="9" font-weight="700" letter-spacing="0.8" fill="#1d4ed8" opacity="0.9">MODEL</text>
+    <text x="18" y="117" font-size="13" font-weight="600" fill="#1b1b19">Plan author</text>
+  </g>
+<g class="lane" data-lane="reviewer">
+    <rect x="0" y="182" width="1660" height="100" fill="#f6f6f2" stroke="#d8d8d1" stroke-width="1"/>
+    <rect x="0" y="182" width="196" height="100" fill="#f6f6f2"/>
+    <line x1="196" y1="182" x2="196" y2="282" stroke="#d8d8d1" stroke-width="1" opacity="0.7"/>
+    <text x="18" y="229" font-size="9" font-weight="700" letter-spacing="0.8" fill="#1d4ed8" opacity="0.9">MODEL</text>
+    <text x="18" y="245" font-size="13" font-weight="600" fill="#1b1b19">Different reviewer</text>
+  </g>
+<g class="lane" data-lane="argon">
+    <rect x="0" y="290" width="1660" height="110" fill="#fcfcfa" stroke="#d8d8d1" stroke-width="1"/>
+    <rect x="0" y="290" width="196" height="110" fill="#fcfcfa"/>
+    <line x1="196" y1="290" x2="196" y2="400" stroke="#d8d8d1" stroke-width="1" opacity="0.7"/>
+    <text x="18" y="342" font-size="9" font-weight="700" letter-spacing="0.8" fill="#1d4ed8" opacity="0.9">MODEL</text>
+    <text x="18" y="358" font-size="13" font-weight="600" fill="#1b1b19">Argon (permission)</text>
+  </g>
+<g class="lane" data-lane="user">
+    <rect x="0" y="408" width="1660" height="140" fill="#f6f6f2" stroke="#d8d8d1" stroke-width="1"/>
+    <rect x="0" y="408" width="196" height="140" fill="#f6f6f2"/>
+    <line x1="196" y1="408" x2="196" y2="548" stroke="#d8d8d1" stroke-width="1" opacity="0.7"/>
+    <text x="18" y="475" font-size="9" font-weight="700" letter-spacing="0.8" fill="#b45309" opacity="0.9">HUMAN</text>
+    <text x="18" y="491" font-size="13" font-weight="600" fill="#1b1b19">User</text>
+  </g>
+<g class="edge" data-edge="e1">
+    <path d="M 300 89 L 330 89 L 330 89 L 360 89" fill="none" stroke="#9b9b93" stroke-width="1.5" stroke-linecap="round" marker-end="url(#arrow)"/>
+    
+  </g>
+<g class="edge" data-edge="e2">
+    <path d="M 600 89 L 631 89 Q 640 89 640 98 L 640 228 Q 640 237 649 237 L 680 237" fill="none" stroke="#9b9b93" stroke-width="1.5" stroke-linecap="round" marker-end="url(#arrow)"/>
+    
+  </g>
+<g class="edge" data-edge="e3">
+    <path d="M 940 237 L 981 237 Q 990 237 990 246 L 990 337 Q 990 346 999 346 L 1040 346" fill="none" stroke="#9b9b93" stroke-width="1.5" stroke-linecap="round" marker-end="url(#arrow)"/>
+    
+  </g>
+<g class="edge" data-edge="e4">
+    <path d="M 1290 333.2 L 1326 333.2 Q 1335 333.2 1335 324.2 L 1335 98 Q 1335 89 1344 89 L 1380 89" fill="none" stroke="#9b9b93" stroke-width="1.5" stroke-linecap="round" marker-end="url(#arrow)"/>
+    <g class="edge-label"><rect x="1317.0" y="203.1" width="36.0" height="15" fill="#ffffff" stroke="#9b9b93" stroke-width="0.8"/><text x="1335.0" y="214.1" text-anchor="middle" font-size="9.5" font-weight="600" fill="#9b9b93">allow</text></g>
+  </g>
+<g class="edge" data-edge="e5">
+    <path d="M 1290 363.6 L 1307 363.6 Q 1316 363.6 1316 354.6 L 1316 235 Q 1316 226 1307 226 L 1023 226 Q 1014 226 1014 217 L 1014 98 Q 1014 89 1023 89 L 1040 89" fill="none" stroke="#b45309" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
+    <g class="edge-label"><rect x="1139.2" y="218.0" width="51.6" height="15" fill="#ffffff" stroke="#b45309" stroke-width="0.8"/><text x="1165.0" y="229.0" text-anchor="middle" font-size="9.5" font-weight="600" fill="#b45309">findings</text></g>
+  </g>
+<g class="edge" data-edge="e6">
+    <path d="M 1165 386 L 1182 386 Q 1191 386 1191 395 L 1191 416 Q 1191 425 1182 425 L 1023 425 Q 1014 425 1014 434 L 1014 454 Q 1014 463 1023 463 L 1040 463" fill="none" stroke="#b42318" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="5 4" marker-end="url(#arrow-danger)"/>
+    <g class="edge-label"><rect x="1076.7" y="417.0" width="51.6" height="15" fill="#ffffff" stroke="#b42318" stroke-width="0.8"/><text x="1102.5" y="428.0" text-anchor="middle" font-size="9.5" font-weight="600" fill="#b42318">critical</text></g>
+  </g>
+<g class="edge" data-edge="e7">
+    <path d="M 1320 89 L 1337 89 Q 1346 89 1346 98 L 1346 154 Q 1346 163 1337 163 L 663 163 Q 654 163 654 172 L 654 228 Q 654 237 663 237 L 680 237" fill="none" stroke="#b45309" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
+    
+  </g>
+<g class="edge" data-edge="e8">
+    <path d="M 1180 122 L 1271 122 Q 1280 122 1280 131 L 1280 454 Q 1280 463 1289 463 L 1380 463" fill="none" stroke="#b42318" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="5 4" marker-end="url(#arrow-danger)"/>
+    <g class="edge-label"><rect x="1249.0" y="284.5" width="62.0" height="15" fill="#ffffff" stroke="#b42318" stroke-width="0.8"/><text x="1280.0" y="295.5" text-anchor="middle" font-size="9.5" font-weight="600" fill="#b42318">3rd denial</text></g>
+  </g>
+<g class="node" data-node="p0" data-shape="circle" transform="translate(60,56)">
+    <ellipse cx="120" cy="33" rx="119" ry="32" fill="#ffffff" stroke="#7c3aed" stroke-width="1.4"/>
+    <g transform="translate(14,16.0) scale(0.86)" fill="none" stroke="#7c3aed" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"><path d="M5.5 3.2 12.5 8 5.5 12.8Z"/></g>
+    <text font-size="12.5" font-weight="520" fill="#1b1b19"><tspan x="41" y="24.0">Plan requested under the agreed</tspan><tspan x="41" y="39.0">scope</tspan></text>
+    <text x="41" y="56.0" font-size="8.5" font-weight="600" letter-spacing="0.6" fill="#7c3aed" opacity="0.9">MANUAL START</text>
+    
+    
+    
+    
+  </g>
+<g class="node" data-node="p1" data-shape="round" transform="translate(360,56)">
+    <rect x="1" y="1" width="238" height="64" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.4"/><rect x="5" y="5" width="230" height="56" fill="none" stroke="#1d4ed8" stroke-width="1" opacity="0.45"/>
+    <g transform="translate(14,23.5) scale(0.86)" fill="none" stroke="#1d4ed8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"><path d="M3.4 8a4.6 4.6 0 0 1 9.2 0 M12.6 8a4.6 4.6 0 0 1-9.2 0 M10.9 4.9 12.8 6.6 11 8.2"/></g>
+    <text font-size="12.5" font-weight="520" fill="#1b1b19"><tspan x="41" y="31.5">Author drafts the plan</tspan></text>
+    <text x="41" y="48.5" font-size="8.5" font-weight="600" letter-spacing="0.6" fill="#1d4ed8" opacity="0.9">AGENT LOOP</text>
+    
+    
+    
+    
+  </g>
+<g class="node" data-node="p2" data-shape="rect" transform="translate(680,204)">
+    <rect x="1" y="1" width="258" height="64" fill="#ffffff" stroke="#b45309" stroke-width="1.4"/>
+    <g transform="translate(14,23.5) scale(0.86)" fill="none" stroke="#b45309" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"><path d="M1.7 8s2.7-4.1 6.3-4.1S14.3 8 14.3 8s-2.7 4.1-6.3 4.1S1.7 8 1.7 8 M8 6.2a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 1 0 0-3.6"/></g>
+    <text font-size="12.5" font-weight="520" fill="#1b1b19"><tspan x="41" y="31.5">Different agent reviews the plan</tspan></text>
+    <text x="41" y="48.5" font-size="8.5" font-weight="600" letter-spacing="0.6" fill="#b45309" opacity="0.9">REVIEW &amp; SIGN-OFF</text>
+    
+    
+    
+    
+  </g>
+<g class="node" data-node="p4" data-shape="hex" transform="translate(1040,56)">
+    <path d="M 18 1 H 262 L 279 33 L 262 65 H 18 L 1 33 Z" fill="#ffffff" stroke="#475569" stroke-width="1.4"/>
+    <g transform="translate(14,16.0) scale(0.86)" fill="none" stroke="#475569" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"><path d="M3.4 8a4.6 4.6 0 0 1 9.2 0 M12.6 8a4.6 4.6 0 0 1-9.2 0 M10.9 4.9 12.8 6.6 11 8.2"/></g>
+    <text font-size="12.5" font-weight="520" fill="#1b1b19"><tspan x="41" y="24.0">Back to plan: revise + re-review</tspan><tspan x="41" y="39.0">(≤3)</tspan></text>
+    <text x="41" y="56.0" font-size="8.5" font-weight="600" letter-spacing="0.6" fill="#475569" opacity="0.9">LOOP</text>
+    
+    
+    
+    
+  </g>
+<g class="node" data-node="p3" data-shape="hex" transform="translate(1040,306)">
+    <path d="M 18 1 H 232 L 249 40 L 232 79 H 18 L 1 40 Z" fill="#ffffff" stroke="#b45309" stroke-width="1.4"/>
+    <g transform="translate(14,30.5) scale(0.86)" fill="none" stroke="#b45309" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"><path d="M3.4 8.3 6.5 11.3 12.6 4.5"/></g>
+    <text font-size="12.5" font-weight="520" fill="#1b1b19"><tspan x="41" y="38.5">Argon: plan gate</tspan></text>
+    <text x="41" y="55.5" font-size="8.5" font-weight="600" letter-spacing="0.6" fill="#b45309" opacity="0.9">APPROVAL GATE</text>
+    
+    
+    
+    
+  </g>
+<g class="node" data-node="p7" data-shape="slant" transform="translate(1380,56)">
+    <path d="M 16 1 H 229 L 214 65 H 1 Z" fill="#ffffff" stroke="#b45309" stroke-width="1.4"/>
+    <g transform="translate(14,23.5) scale(0.86)" fill="none" stroke="#b45309" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"><path d="M2.8 8h9.4 M9 4.4 12.6 8 9 11.6"/></g>
+    <text font-size="12.5" font-weight="520" fill="#1b1b19"><tspan x="41" y="31.5">Plan allowed; backend may start</tspan></text>
+    <text x="41" y="48.5" font-size="8.5" font-weight="600" letter-spacing="0.6" fill="#b45309" opacity="0.9">HANDOFF</text>
+    
+    
+    
+    
+  </g>
+<g class="node" data-node="p6" data-shape="rect" transform="translate(1040,430)">
+    <rect x="1" y="1" width="218" height="64" fill="#ffffff" stroke="#57606a" stroke-width="1.4"/>
+    <g transform="translate(14,23.5) scale(0.86)" fill="none" stroke="#57606a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"><path d="M8 2.6 14.1 13H1.9Z M8 6.3v3.5 M8 11.3v.1"/></g>
+    <text font-size="12.5" font-weight="520" fill="#1b1b19"><tspan x="41" y="31.5">STOP: critical only</tspan></text>
+    <text x="41" y="48.5" font-size="8.5" font-weight="600" letter-spacing="0.6" fill="#57606a" opacity="0.9">ERROR PATH</text>
+    
+    
+    
+    
+  </g>
+<g class="node" data-node="p5" data-shape="rect" transform="translate(1380,430)">
+    <rect x="1" y="1" width="228" height="64" fill="#ffffff" stroke="#57606a" stroke-width="1.4"/>
+    <g transform="translate(14,23.5) scale(0.86)" fill="none" stroke="#57606a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"><path d="M8 13.2V3.4 M4.6 6.8 8 3.4l3.4 3.4"/></g>
+    <text font-size="12.5" font-weight="520" fill="#1b1b19"><tspan x="41" y="31.5">Escalate: 3rd plan denial</tspan></text>
+    <text x="41" y="48.5" font-size="8.5" font-weight="600" letter-spacing="0.6" fill="#57606a" opacity="0.9">ESCALATE</text>
+    
+    
+    
+    
+  </g>
+</svg>

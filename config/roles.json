@@ -1,0 +1,214 @@
+{
+  "status": "design-only",
+  "notice": "Declarative design configuration. It is not runtime enforcement.",
+  "principal": {
+    "role": "user",
+    "authority": "scope, budget, technical disputes, final stop"
+  },
+  "permission_gate": {
+    "id": "argon",
+    "model": "google/gemini-4-argon",
+    "tools": [],
+    "role": "permission only; not a technical reviewer",
+    "approval_is_security_boundary": false,
+    "gates": [
+      "board-path-and-capability",
+      "plan",
+      "each-persistent-patch",
+      "frontend-start",
+      "commit",
+      "push"
+    ],
+    "on_deny": "revise-and-resubmit",
+    "on_deny_with_findings": "revise, re-review, re-test, rebuild the packet, resubmit",
+    "denial_classification": ["fixable", "critical", "ambiguous"],
+    "fixable_denial": "revise-and-resubmit",
+    "critical_denial": "hard-stop",
+    "ambiguous_denial": "escalate-to-user",
+    "max_denial_rounds": 3,
+    "after_max_denials": "escalate-to-user",
+    "on_unavailable": "stop",
+    "on_escalate": "return to user",
+    "reuse_approval": false,
+    "compute_hashes": false,
+    "hard_stop_conditions": [
+      "path-escape-or-symlink",
+      "secret-exposure-or-credential-misuse",
+      "sandbox-escape",
+      "destructive-out-of-scope-action",
+      "unrecoverable-runtime-corruption"
+    ]
+  },
+  "team": {
+    "size": 4,
+    "no_fifth_supervisor": true,
+    "members": [
+      {
+        "id": "B1",
+        "model": "deepseek/deepseek-flash",
+        "thinking": "max",
+        "domain": "backend",
+        "default_role": "author"
+      },
+      {
+        "id": "B2",
+        "model": "deepseek/deepseek-flash",
+        "thinking": "max",
+        "domain": "backend",
+        "default_role": "reviewer"
+      },
+      {
+        "id": "F1",
+        "model": "openai-codex/gpt-6-luna",
+        "thinking": "model-default",
+        "domain": "frontend",
+        "default_role": "author"
+      },
+      {
+        "id": "F2",
+        "model": "openai-codex/gpt-6-luna",
+        "thinking": "model-default",
+        "domain": "frontend",
+        "default_role": "reviewer"
+      }
+    ],
+    "default_patch_rule": "one author, one different reviewer",
+    "self_review": false,
+    "co_design_before_patch": true,
+    "reassignment": "recorded handoff only"
+  },
+  "board": {
+    "path": "board/<task-id>/events.jsonl",
+    "tracked": false,
+    "writer": "host",
+    "append_only": true,
+    "hash_chain": true,
+    "actor_identity": "host-attached",
+    "board_is_permission": false,
+    "event_types": [
+      "NEED",
+      "QUESTION",
+      "PROPOSAL",
+      "DECISION",
+      "ACK",
+      "NACK",
+      "OBJECTION",
+      "CHANGE_REQUEST",
+      "EVIDENCE",
+      "READINESS",
+      "HANDOFF",
+      "ESCALATION"
+    ],
+    "discussion_limit": {
+      "proposals": 2,
+      "objections": 1,
+      "silence_is_consent": false
+    }
+  },
+  "backend_first": {
+    "frontend_persistent_artifacts_before_ready": false,
+    "frontend_pre_ready_allowed": [
+      "needs",
+      "user flows",
+      "state matrix",
+      "acceptance criteria",
+      "accessibility",
+      "fixture needs",
+      "read-only contract review"
+    ],
+    "readiness_requires": [
+      "backend tree hash",
+      "contract version and hash",
+      "fixtures hash",
+      "test manifest and evidence hash",
+      "docs/examples hash",
+      "B1 attestation",
+      "different backend reviewer approval",
+      "F1 ACK on the same hashes",
+      "F2 ACK on the same hashes",
+      "zero open NACK"
+    ],
+    "frontend_grant": "separate Argon approval bound to readiness hashes; up to 3 grant requests, then escalate",
+    "frontend_grant_max_rounds": 3
+  },
+  "patch_gate": {
+    "author_tools": [],
+    "reviewer_tools": [],
+    "candidate_tests": "isolated scratch; target unchanged",
+    "max_review_attempts": 3,
+    "repeated_finding": "escalate-to-user",
+    "argon_denial": "revise-and-resubmit; max 3 Argon rounds; then escalate",
+    "argon_denial_max_rounds": 3,
+    "resubmit_unchanged": false,
+    "argon_packet_fields": [
+      "actor",
+      "phase",
+      "root",
+      "paths-and-operations",
+      "base-tree",
+      "diff-hash",
+      "contract-and-fixture-hashes",
+      "test-evidence",
+      "nonce",
+      "expiry",
+      "conditions"
+    ],
+    "any_diff_change_invalidates": true,
+    "generated_diff": "new proposal",
+    "post_apply_mismatch": "halt and preserve state; user decides",
+    "cleanup": "separate approval"
+  },
+  "change_control": {
+    "invalidates": [
+      "B1 attestation",
+      "B2 approval",
+      "F1 ACK",
+      "F2 ACK",
+      "frontend grant",
+      "integration candidate",
+      "commit eligibility"
+    ],
+    "scope_change": "user reauthorization, then plan review and Argon plan gate",
+    "rework_order": "backend patch -> tests -> readiness -> ACKs -> fresh frontend grant"
+  },
+  "commit_push": {
+    "enabled": false,
+    "commit": {
+      "approval": "separate one-use Argon gate",
+      "binds": ["root", "pre-head", "tree", "message", "ref", "identity", "nonce", "expiry"],
+      "amend": false,
+      "hooks": false,
+      "cas": true,
+      "post_verify": true
+    },
+    "push": {
+      "approval": "separate one-use Argon gate",
+      "binds": ["resolved-url", "one-src-dst-ref", "commit", "expected-remote-oid", "nonce", "expiry"],
+      "credentials": "broker-only",
+      "force": false,
+      "tags": false,
+      "delete": false,
+      "prune": false,
+      "mirror": false,
+      "multiref": false,
+      "fast_forward": true,
+      "expected_oid_cas": true,
+      "post_verify": true,
+      "unknown_state": "stop"
+    }
+  },
+  "current_state": {
+    "engine": "v1-supervised-host",
+    "host": "factory/host.mjs",
+    "board_service": "local-hash-chained-jsonl",
+    "broker": "not-implemented",
+    "sandbox": "not-implemented",
+    "test_runner": "host-invoked-node-test",
+    "text_annotator": "v1",
+    "text_annotator_tests": 26,
+    "browser_smoke": true,
+    "commit_enabled": false,
+    "push_enabled": false,
+    "remote_configured": false
+  }
+}

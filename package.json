@@ -1,0 +1,15 @@
+{
+  "name": "program-factory",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Supervised V1 of a four-agent program factory, plus the first built app.",
+  "scripts": {
+    "start": "node apps/text-annotator/server.mjs",
+    "test": "npm --prefix apps/text-annotator test",
+    "host": "node factory/host.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,396 @@
+{
+  "version": 1,
+  "title": "One patch gate — iterative review, then human escalation",
+  "width": 2520,
+  "height": 900,
+  "lanes": [
+    {
+      "id": "author",
+      "name": "Author (B1 or F1)",
+      "kind": "agent",
+      "y": 34,
+      "height": 160
+    },
+    {
+      "id": "reviewer",
+      "name": "Reviewer (B2 or F2)",
+      "kind": "agent",
+      "y": 202,
+      "height": 100
+    },
+    {
+      "id": "host",
+      "name": "Host / revision",
+      "kind": "system",
+      "y": 310,
+      "height": 300
+    },
+    {
+      "id": "argon",
+      "name": "Argon (permission)",
+      "kind": "agent",
+      "y": 618,
+      "height": 100
+    },
+    {
+      "id": "user",
+      "name": "User",
+      "kind": "human",
+      "y": 726,
+      "height": 150
+    }
+  ],
+  "nodes": [
+    {
+      "id": "s0",
+      "primitive": "trigger-manual",
+      "label": "Patch requested under an approved plan",
+      "lane": "author",
+      "x": 60,
+      "y": 56,
+      "w": 220,
+      "h": 66,
+      "props": {
+        "actor": "Host"
+      }
+    },
+    {
+      "id": "a0",
+      "primitive": "agent",
+      "label": "Propose exact diff in memory",
+      "lane": "author",
+      "x": 320,
+      "y": 56,
+      "w": 240,
+      "h": 66,
+      "props": {
+        "actor": "One eligible author",
+        "scope": "no write tools; proposal only",
+        "isolation": "proposal only; host sandbox required"
+      }
+    },
+    {
+      "id": "r0",
+      "primitive": "review",
+      "label": "Different reviewer inspects exact diff",
+      "lane": "reviewer",
+      "x": 620,
+      "y": 220,
+      "w": 260,
+      "h": 66,
+      "props": {
+        "actor": "The other model in the pair",
+        "why": "fresh context; no self-review"
+      }
+    },
+    {
+      "id": "h0",
+      "primitive": "subprocess",
+      "label": "Candidate tests in isolated scratch",
+      "lane": "host",
+      "x": 1050,
+      "y": 340,
+      "w": 260,
+      "h": 66,
+      "props": {
+        "actor": "Host test runner",
+        "scope": "persistent tree unchanged"
+      }
+    },
+    {
+      "id": "d0",
+      "primitive": "decision",
+      "label": "Review + tests pass?",
+      "lane": "host",
+      "x": 1350,
+      "y": 326,
+      "w": 200,
+      "h": 90,
+      "props": {
+        "condition": "max 3 review attempts; a repeated finding escalates"
+      }
+    },
+    {
+      "id": "rev",
+      "primitive": "loop",
+      "label": "Back to review: revise (≤3)",
+      "lane": "host",
+      "x": 350,
+      "y": 430,
+      "w": 260,
+      "h": 66,
+      "props": {
+        "until": "review and tests pass, or 3rd attempt",
+        "max": "3 review attempts",
+        "returns_to": "reviewer (r0)",
+        "actor": "Host coordinates; author revises; reviewer re-reviews"
+      }
+    },
+    {
+      "id": "rev-argon",
+      "primitive": "loop",
+      "label": "Back to review: revise + re-review (≤3)",
+      "lane": "host",
+      "x": 700,
+      "y": 520,
+      "w": 280,
+      "h": 66,
+      "props": {
+        "until": "Argon accepts or 3rd denial",
+        "max": "3 Argon patch reviews",
+        "returns_to": "reviewer (r0)",
+        "actor": "Host coordinates; author revises; reviewer re-reviews"
+      }
+    },
+    {
+      "id": "g0",
+      "primitive": "approval",
+      "label": "Argon: exact one-use packet",
+      "lane": "argon",
+      "x": 1350,
+      "y": 630,
+      "w": 250,
+      "h": 80,
+      "props": {
+        "binds": "root, paths, base, diff hash, tests, nonce, expiry",
+        "why": "Argon cannot compute hashes; the broker does",
+        "on_findings": "revise + re-review; up to 3 Argon rounds",
+        "hard_stop": "critical security or runtime issue only"
+      }
+    },
+    {
+      "id": "h1",
+      "primitive": "tool-exec",
+      "label": "Broker validates + applies",
+      "lane": "host",
+      "x": 1680,
+      "y": 340,
+      "w": 250,
+      "h": 66,
+      "props": {
+        "actor": "Deterministic broker",
+        "isolation": "host-enforced; NOT IMPLEMENTED in this design"
+      }
+    },
+    {
+      "id": "d1",
+      "primitive": "decision",
+      "label": "Post-verify matches?",
+      "lane": "host",
+      "x": 2000,
+      "y": 326,
+      "w": 200,
+      "h": 90,
+      "props": {
+        "condition": "tree, paths, hashes, scope"
+      }
+    },
+    {
+      "id": "e0",
+      "primitive": "end",
+      "label": "Applied; evidence recorded",
+      "lane": "host",
+      "x": 2260,
+      "y": 350,
+      "w": 200,
+      "h": 62,
+      "props": {}
+    },
+    {
+      "id": "err1",
+      "primitive": "error",
+      "label": "HALT: preserve state; user decides",
+      "lane": "host",
+      "x": 2260,
+      "y": 440,
+      "w": 240,
+      "h": 66,
+      "props": {
+        "why": "no silent repair, rollback, or cleanup"
+      }
+    },
+    {
+      "id": "esc-review",
+      "primitive": "escalate",
+      "label": "Escalate: 3rd / repeat",
+      "lane": "user",
+      "x": 200,
+      "y": 740,
+      "w": 250,
+      "h": 66,
+      "props": {
+        "actor": "User",
+        "why": "review and tests are not converging"
+      }
+    },
+    {
+      "id": "crit",
+      "primitive": "error",
+      "label": "STOP: critical only",
+      "lane": "user",
+      "x": 1050,
+      "y": 740,
+      "w": 220,
+      "h": 66,
+      "props": {
+        "why": "major security or runtime issue; preserve evidence and involve the user"
+      }
+    },
+    {
+      "id": "esc-argon",
+      "primitive": "escalate",
+      "label": "Escalate: 3rd Argon denial",
+      "lane": "user",
+      "x": 1350,
+      "y": 740,
+      "w": 250,
+      "h": 66,
+      "props": {
+        "actor": "User",
+        "why": "three Argon rounds did not converge"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "kind": "sequence",
+      "label": "",
+      "from": "s0",
+      "to": "a0",
+      "fromPort": "out"
+    },
+    {
+      "id": "e2",
+      "kind": "sequence",
+      "label": "",
+      "from": "a0",
+      "to": "r0",
+      "fromPort": "out"
+    },
+    {
+      "id": "e3",
+      "kind": "sequence",
+      "label": "",
+      "from": "r0",
+      "to": "h0",
+      "fromPort": "out"
+    },
+    {
+      "id": "e4",
+      "kind": "sequence",
+      "label": "",
+      "from": "h0",
+      "to": "d0",
+      "fromPort": "out"
+    },
+    {
+      "id": "e5",
+      "kind": "loop",
+      "label": "revise",
+      "from": "d0",
+      "to": "rev",
+      "fromPort": "false"
+    },
+    {
+      "id": "e6",
+      "kind": "error",
+      "label": "critical",
+      "from": "d0",
+      "to": "crit",
+      "fromPort": "error"
+    },
+    {
+      "id": "e7",
+      "kind": "loop",
+      "label": "",
+      "from": "rev",
+      "to": "r0",
+      "fromPort": "out"
+    },
+    {
+      "id": "e8",
+      "kind": "error",
+      "label": "3rd / repeat",
+      "from": "rev",
+      "to": "esc-review",
+      "fromPort": "error"
+    },
+    {
+      "id": "e9",
+      "kind": "sequence",
+      "label": "yes",
+      "from": "d0",
+      "to": "g0",
+      "fromPort": "true"
+    },
+    {
+      "id": "e10",
+      "kind": "error",
+      "label": "findings",
+      "from": "g0",
+      "to": "rev-argon",
+      "fromPort": "false"
+    },
+    {
+      "id": "e11",
+      "kind": "error",
+      "label": "critical",
+      "from": "g0",
+      "to": "crit",
+      "fromPort": "error"
+    },
+    {
+      "id": "e12",
+      "kind": "loop",
+      "label": "",
+      "from": "rev-argon",
+      "to": "r0",
+      "fromPort": "out"
+    },
+    {
+      "id": "e13",
+      "kind": "error",
+      "label": "3rd denial",
+      "from": "rev-argon",
+      "to": "esc-argon",
+      "fromPort": "error"
+    },
+    {
+      "id": "e14",
+      "kind": "sequence",
+      "label": "allow",
+      "from": "g0",
+      "to": "h1",
+      "fromPort": "true"
+    },
+    {
+      "id": "e15",
+      "kind": "sequence",
+      "label": "",
+      "from": "h1",
+      "to": "d1",
+      "fromPort": "out"
+    },
+    {
+      "id": "e16",
+      "kind": "error",
+      "label": "no",
+      "from": "d1",
+      "to": "err1",
+      "fromPort": "false"
+    },
+    {
+      "id": "e17",
+      "kind": "sequence",
+      "label": "yes",
+      "from": "d1",
+      "to": "e0",
+      "fromPort": "true"
+    }
+  ],
+  "meta": {
+    "source": "program-factory design; iterative per-patch gate for both pairs",
+    "interpreter": "authored-manual-layout"
+  }
+}

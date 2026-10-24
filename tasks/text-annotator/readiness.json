@@ -1,0 +1,11 @@
+{
+  "task": "text-annotator-v1",
+  "phase": "backend-ready",
+  "backend_tree": "38128e40dbb63fec228aca9bdb56804bac130affd6d7e16e81424d0f13cba61e",
+  "backend_tests": "3ebd0a1b7fe5a0c7087d36e174fb3585efc31f9fa7625857b0be254af5da6449",
+  "contract_hash": "031457eac343a0a35bb32a19a8a93c068ce3adb07d9d1224d55e5af78f15b853",
+  "test_evidence": "3ab66b968061af931c8ad84c3a9b0dc82e37f70c4abc2a72de3f78e00e33d054",
+  "test_summary": "25 pass, 0 fail, 0 skipped; static frontend test intentionally excluded until the frontend exists",
+  "frontend_grant_required": true,
+  "readiness_hash": "efd7268f12a44b34c5dd50764f3bd3b3024deb22b72a953852b118593077aa40"
+}

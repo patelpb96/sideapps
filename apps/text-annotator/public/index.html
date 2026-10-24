@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Text Annotator</title>
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">TA</span>
+      <div>
+        <h1>Text Annotator</h1>
+        <p>Label passages in your documents</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <aside class="left-column" aria-label="Document controls">
+      <section class="panel upload-panel" aria-labelledby="upload-heading">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Get started</p>
+            <h2 id="upload-heading">Add a document</h2>
+          </div>
+        </div>
+
+        <div id="drop-zone" class="drop-zone">
+          <span class="upload-icon" aria-hidden="true">↑</span>
+          <p class="drop-title">Drop a file here</p>
+          <p class="muted">or choose one from your device</p>
+          <input id="file-input" class="visually-hidden" type="file" accept=".txt,.md,.pdf,.docx">
+          <button id="pick-file" class="button button-secondary" type="button">Choose file</button>
+          <p class="file-types">TXT, MD, PDF, DOCX · up to 25 MiB</p>
+        </div>
+      </section>
+
+      <section class="panel documents-panel" aria-labelledby="documents-heading">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Workspace</p>
+            <h2 id="documents-heading">Documents</h2>
+          </div>
+          <span id="document-count" class="count-badge" aria-label="Document count">0</span>
+        </div>
+        <ul id="document-list" class="document-list" aria-label="Uploaded documents">
+          <li class="list-empty">Loading documents…</li>
+        </ul>
+      </section>
+    </aside>
+
+    <section class="panel viewer-panel" aria-labelledby="active-title">
+      <div class="viewer-heading">
+        <div class="viewer-title-group">
+          <p class="eyebrow">Document viewer</p>
+          <h2 id="active-title">No document open</h2>
+          <p id="active-meta" class="muted">Choose a document or upload a file to begin.</p>
+        </div>
+        <p id="document-warning" class="document-warning" hidden></p>
+      </div>
+      <div id="viewer" class="text-viewer" role="region" aria-label="Document text" tabindex="0">
+        Open a document to view its text.
+      </div>
+    </section>
+
+    <aside class="right-column" aria-label="Annotations and status">
+      <section class="panel palette-panel" aria-labelledby="palette-heading">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Available labels</p>
+            <h2 id="palette-heading">Label palette</h2>
+          </div>
+        </div>
+        <ul class="label-legend">
+          <li><span class="label-swatch label-person" aria-hidden="true"></span>Person</li>
+          <li><span class="label-swatch label-organization" aria-hidden="true"></span>Organization</li>
+          <li><span class="label-swatch label-location" aria-hidden="true"></span>Location</li>
+          <li><span class="label-swatch label-date" aria-hidden="true"></span>Date</li>
+          <li><span class="label-swatch label-amount" aria-hidden="true"></span>Amount</li>
+          <li><span class="label-swatch label-other" aria-hidden="true"></span>Other</li>
+        </ul>
+        <p class="help-text">Select text in the document, then choose a label. Annotations cannot overlap.</p>
+
+        <form id="offset-form" class="offset-form">
+          <h3>Add by offsets</h3>
+          <p id="offset-help" class="offset-help">Use zero-based character offsets; the end offset is exclusive.</p>
+          <div class="offset-fields">
+            <label for="offset-start">Start
+              <input id="offset-start" name="start" type="number" min="0" step="1" required inputmode="numeric">
+            </label>
+            <label for="offset-end">End
+              <input id="offset-end" name="end" type="number" min="0" step="1" required inputmode="numeric">
+            </label>
+          </div>
+          <label for="offset-label">Label
+            <select id="offset-label" name="label">
+              <option>Person</option>
+              <option>Organization</option>
+              <option>Location</option>
+              <option>Date</option>
+              <option>Amount</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <button id="offset-submit" class="button button-secondary" type="submit">Add annotation</button>
+        </form>
+      </section>
+
+      <section class="panel annotations-panel" aria-labelledby="annotations-heading">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Current document</p>
+            <h2 id="annotations-heading">Annotations</h2>
+          </div>
+          <span id="annotation-count" class="count-badge" aria-label="Annotation count">0</span>
+        </div>
+        <ul id="annotation-list" class="annotation-list">
+          <li class="list-empty">Open a document to see annotations.</li>
+        </ul>
+        <button id="export-button" class="button button-primary export-button" type="button" disabled>
+          Export annotations
+        </button>
+      </section>
+
+      <section id="status-panel" class="panel status-panel" data-state="info" aria-labelledby="status-heading">
+        <h2 id="status-heading">Status</h2>
+        <p id="status-message" role="status" aria-live="polite" aria-atomic="true">Ready. Upload a document or open one from the list.</p>
+      </section>
+    </aside>
+  </main>
+
+  <div id="label-menu" class="label-menu" role="group" aria-label="Choose an annotation label" hidden></div>
+</body>
+</html>

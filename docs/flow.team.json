@@ -1,0 +1,211 @@
+{
+  "version": 1,
+  "title": "Program factory — who can do what",
+  "lanes": [
+    {
+      "id": "user",
+      "name": "User (principal)",
+      "kind": "human"
+    },
+    {
+      "id": "argon",
+      "name": "Argon (no tools)",
+      "kind": "agent"
+    },
+    {
+      "id": "team",
+      "name": "Four agents",
+      "kind": "agent"
+    },
+    {
+      "id": "host",
+      "name": "Host / board",
+      "kind": "system"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "u0",
+      "primitive": "trigger-manual",
+      "label": "Scope, budget, stop conditions",
+      "lane": "user",
+      "props": {
+        "actor": "User"
+      }
+    },
+    {
+      "id": "a0",
+      "primitive": "approval",
+      "label": "Argon: permission gate",
+      "lane": "argon",
+      "props": {
+        "actor": "google/gemini-4-argon",
+        "binds": "board capability, plan, every patch, frontend grant, commit, push",
+        "why": "tool-free policy approval, not a security boundary"
+      }
+    },
+    {
+      "id": "stop",
+      "primitive": "error",
+      "label": "Unavailable: stop",
+      "lane": "user",
+      "props": {
+        "why": "no review can happen; critical issues also stop"
+      }
+    },
+    {
+      "id": "h0",
+      "primitive": "datastore",
+      "label": "Board (evidence) + host broker",
+      "lane": "host",
+      "props": {
+        "actor": "deterministic host",
+        "scope": "task-scoped events; no worker write tools",
+        "why": "board is evidence, never permission"
+      }
+    },
+    {
+      "id": "b1",
+      "primitive": "agent",
+      "label": "B1 backend author",
+      "lane": "team",
+      "props": {
+        "actor": "deepseek/deepseek-flash --thinking max",
+        "isolation": "proposal only; host sandbox required"
+      }
+    },
+    {
+      "id": "b2",
+      "primitive": "review",
+      "label": "B2 backend reviewer",
+      "lane": "team",
+      "props": {
+        "actor": "deepseek/deepseek-flash --thinking max"
+      }
+    },
+    {
+      "id": "f1",
+      "primitive": "agent",
+      "label": "F1 frontend author",
+      "lane": "team",
+      "props": {
+        "actor": "openai-codex/gpt-6-luna",
+        "isolation": "proposal only; host sandbox required"
+      }
+    },
+    {
+      "id": "f2",
+      "primitive": "review",
+      "label": "F2 frontend reviewer",
+      "lane": "team",
+      "props": {
+        "actor": "openai-codex/gpt-6-luna"
+      }
+    },
+    {
+      "id": "revise",
+      "primitive": "loop",
+      "label": "Deny: revise + resubmit (≤3)",
+      "lane": "team",
+      "props": {
+        "until": "Argon accepts or the 3rd denial",
+        "max": "3 Argon rounds",
+        "returns_to": "the responsible pair"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "kind": "sequence",
+      "label": "scope",
+      "from": "u0",
+      "to": "a0",
+      "fromPort": "out"
+    },
+    {
+      "id": "e2",
+      "kind": "error",
+      "label": "deny",
+      "from": "a0",
+      "to": "revise",
+      "fromPort": "false"
+    },
+    {
+      "id": "e3",
+      "kind": "sequence",
+      "label": "capability",
+      "from": "a0",
+      "to": "h0",
+      "fromPort": "true"
+    },
+    {
+      "id": "e4",
+      "kind": "async",
+      "label": "board",
+      "from": "h0",
+      "to": "b1",
+      "fromPort": "out"
+    },
+    {
+      "id": "e5",
+      "kind": "async",
+      "label": "board",
+      "from": "h0",
+      "to": "b2",
+      "fromPort": "out"
+    },
+    {
+      "id": "e6",
+      "kind": "async",
+      "label": "board",
+      "from": "h0",
+      "to": "f1",
+      "fromPort": "out"
+    },
+    {
+      "id": "e7",
+      "kind": "async",
+      "label": "board",
+      "from": "h0",
+      "to": "f2",
+      "fromPort": "out"
+    },
+    {
+      "id": "e8",
+      "kind": "sequence",
+      "label": "review",
+      "from": "b1",
+      "to": "b2",
+      "fromPort": "out"
+    },
+    {
+      "id": "e9",
+      "kind": "sequence",
+      "label": "review",
+      "from": "f1",
+      "to": "f2",
+      "fromPort": "out"
+    },
+    {
+      "id": "e10",
+      "kind": "sequence",
+      "label": "handoff",
+      "from": "b2",
+      "to": "f1",
+      "fromPort": "out"
+    },
+    {
+      "id": "e11",
+      "kind": "error",
+      "label": "unavailable / critical",
+      "from": "a0",
+      "to": "stop",
+      "fromPort": "error"
+    }
+  ],
+  "meta": {
+    "source": "program-factory design; four technical agents plus a separate permission gate",
+    "interpreter": "authored"
+  }
+}

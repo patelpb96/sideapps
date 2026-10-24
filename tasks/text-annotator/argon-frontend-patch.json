@@ -1,0 +1,1 @@
+{"decision":"allow","class":"fixable","reason":"All 26 tests pass, F2 independent review passed, and hashes/constraints are verified.","blast_radius":"Creates apps/text-annotator/public/{index.html,app.js,style.css}; no existing files overwritten; no backend changes or git operations.","conditions":"Verify SHA-256 hashes match after copy."}
