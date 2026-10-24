@@ -71,7 +71,7 @@ const ID = /^[a-z0-9][a-z0-9-]{0,62}$/;
 const EVENT_TYPES = new Set([
   'TASK', 'NEED', 'QUESTION', 'PROPOSAL', 'DECISION', 'ACK', 'NACK',
   'OBJECTION', 'CHANGE_REQUEST', 'EVIDENCE', 'READINESS', 'HANDOFF',
-  'ESCALATION', 'PLAN', 'REVIEW', 'GATE', 'PATCH', 'APPLY', 'TEST', 'ASK',
+  'ESCALATION', 'PLAN', 'REVIEW', 'GATE', 'PATCH', 'APPLY', 'TEST', 'ASK', 'PUSH', 'COMMIT',
 ]);
 
 function sha256(value) {

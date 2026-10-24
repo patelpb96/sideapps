@@ -93,7 +93,7 @@ The focused loop diagrams are [`docs/flowchart-plan.svg`](docs/flowchart-plan.sv
 
 ## Current state
 
-- No remote is configured; the initial local commit is `d29e925`. No push.
+- Remote `origin` is <https://github.com/patelpb96/sideapps>; `main` is pushed. Push automation is not implemented.
 - `factory/host.mjs` is a supervised facilitator: it keeps a hash-chained board, calls the four roles with no tools, asks Argon, applies only approved bundles, and runs tests.
 - `apps/text-annotator` is built and tested: 26/26 tests pass; a browser smoke test added a real annotation.
 - The broker, OS sandbox, commit gate, and push gate are still not implemented. The host is not a security boundary.

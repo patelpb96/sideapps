@@ -41,7 +41,7 @@ The detailed plan and patch diagrams draw their back edges. The main pipeline us
 
 **Committed**
 
-- Initial local commit `d29e925` (83 files). No remote and no push.
+- Initial local commits `d29e925` and `2e55157` (83 files). Pushed to <https://github.com/patelpb96/sideapps> on `main`.
 
 **Still absent**
 
