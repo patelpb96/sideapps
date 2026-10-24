@@ -1,12 +1,14 @@
 {
-  "status": "design-only",
+  "status": "v1-grunt-team + super-team-design",
   "notice": "Declarative design configuration. It is not runtime enforcement.",
+  "project": "Program Factory - Grunt Team",
+  "super_team_status": "design-only",
   "principal": {
     "role": "user",
     "authority": "scope, budget, technical disputes, final stop"
   },
   "permission_gate": {
-    "id": "argon",
+    "id": "frontier-intelligence",
     "model": "google/gemini-4-argon",
     "tools": [],
     "role": "permission only; not a technical reviewer",
@@ -21,7 +23,11 @@
     ],
     "on_deny": "revise-and-resubmit",
     "on_deny_with_findings": "revise, re-review, re-test, rebuild the packet, resubmit",
-    "denial_classification": ["fixable", "critical", "ambiguous"],
+    "denial_classification": [
+      "fixable",
+      "critical",
+      "ambiguous"
+    ],
     "fixable_denial": "revise-and-resubmit",
     "critical_denial": "hard-stop",
     "ambiguous_denial": "escalate-to-user",
@@ -37,7 +43,9 @@
       "sandbox-escape",
       "destructive-out-of-scope-action",
       "unrecoverable-runtime-corruption"
-    ]
+    ],
+    "name": "Frontier Intelligence",
+    "default_instance": "Argon"
   },
   "team": {
     "size": 4,
@@ -75,7 +83,8 @@
     "default_patch_rule": "one author, one different reviewer",
     "self_review": false,
     "co_design_before_patch": true,
-    "reassignment": "recorded handoff only"
+    "reassignment": "recorded handoff only",
+    "name": "Grunt Team"
   },
   "board": {
     "path": "board/<task-id>/events.jsonl",
@@ -175,7 +184,16 @@
     "enabled": false,
     "commit": {
       "approval": "separate one-use Argon gate",
-      "binds": ["root", "pre-head", "tree", "message", "ref", "identity", "nonce", "expiry"],
+      "binds": [
+        "root",
+        "pre-head",
+        "tree",
+        "message",
+        "ref",
+        "identity",
+        "nonce",
+        "expiry"
+      ],
       "amend": false,
       "hooks": false,
       "cas": true,
@@ -183,7 +201,14 @@
     },
     "push": {
       "approval": "separate one-use Argon gate",
-      "binds": ["resolved-url", "one-src-dst-ref", "commit", "expected-remote-oid", "nonce", "expiry"],
+      "binds": [
+        "resolved-url",
+        "one-src-dst-ref",
+        "commit",
+        "expected-remote-oid",
+        "nonce",
+        "expiry"
+      ],
       "credentials": "broker-only",
       "force": false,
       "tags": false,
@@ -207,8 +232,65 @@
     "text_annotator": "v1",
     "text_annotator_tests": 26,
     "browser_smoke": true,
-    "commit_enabled": false,
-    "push_enabled": false,
-    "remote_configured": false
+    "remote_configured": true,
+    "super_team": "design-only",
+    "grunt_team": "v1",
+    "remote_url": "https://github.com/patelpb96/sideapps.git",
+    "commit_automation": false,
+    "push_automation": false,
+    "commit_manual_gated": true,
+    "push_manual_gated": true,
+    "review_policy": "manual-v1"
+  },
+  "super_team": {
+    "status": "design-only",
+    "frontier": [
+      {
+        "id": "A1",
+        "model": "openai-codex/gpt-6.1-sol",
+        "thinking": "high",
+        "role": "architect, task cards, red tests, frontier review"
+      },
+      {
+        "id": "A2",
+        "model": "openai-codex/gpt-6-sol",
+        "thinking": "high",
+        "role": "lead programmer, integrator, feasibility review"
+      }
+    ],
+    "grunt": [
+      "B1",
+      "B2",
+      "F1",
+      "F2"
+    ],
+    "task_card_template": "templates/task-card.md",
+    "delegation_requires": [
+      "one goal",
+      "exact files and interfaces",
+      "no open design decision",
+      "red tests authored by A1 and reviewed by A2",
+      "patch budget",
+      "named grunt review pair",
+      "non-goals and do-not-touch list",
+      "stop conditions"
+    ],
+    "max_grunt_rounds": 3,
+    "frontier_review": "A1 checks the patch against the card and tests; A2 integrates",
+    "argon_gates": [
+      "plan",
+      "task-card",
+      "each-patch",
+      "commit",
+      "push"
+    ]
+  },
+  "independent_review": {
+    "policy": "config/review-policy.json",
+    "default": "astra",
+    "claude": "handoff-only",
+    "human_choice_timeout_seconds": 300,
+    "astra_unavailable": "deny-review",
+    "degraded": "one round, marked not independent"
   }
 }

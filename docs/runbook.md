@@ -2,9 +2,11 @@
 
 This is the manual operating procedure. For the V1 supervised host, use `factory/host.mjs` and see `factory/README.md`; this runbook remains the target sequence for the broker/sandbox era.
 
-The V1 host keeps a hash-chained board, calls the roles with no tools, checks an Argon allow token for a bundle hash, applies under `apps/`, and runs tests. It is **not** a sandbox, does not isolate model processes, and does not make Argon's decision enforcement.
+The V1 host keeps a hash-chained board, calls the roles with no tools, checks a Frontier Intelligence allow token for a bundle hash, applies under `apps/`, and runs tests. It is **not** a sandbox, does not isolate model processes, and does not make the permission decision enforcement.
 
-Commit and push are **not enabled**. The current `guard.py` has no commit or push action, and this repo has no remote. Do not improvise one.
+Argon below is the default **Frontier Intelligence** instance; the role is Frontier Intelligence. Super Team mode is documented in `docs/super-team.md`. A1/A2 are `ask` roles; a task card is approved with `gate <task> task-card ...` before delegation. The card's grunt patch still follows the per-patch procedure below.
+
+Commit and push are **manual Frontier Intelligence-gated steps**, not host automation. The operator stages, gates, commits, gates the push, and verifies the remote OID. The future broker will automate this; until then, follow section 11.
 
 ## 0. Before a task
 
@@ -202,12 +204,16 @@ No stale ACK, grant, or patch approval is reused.
 
 ## 11. Commit and push
 
-Not enabled. Do not use the generic guard as a commit or push approval. The future gates are:
+The host does not automate these. They are manual, one-use Argon-gated steps.
 
-- **Commit:** exact root, pre-HEAD, tree, message, ref, identity, nonce, expiry; no amend, no hooks; broker CAS and post-verify.
-- **Push:** resolved credential-free URL, one explicit `src:dst` ref, exact commit, expected remote pre-OID; broker-only credentials; fast-forward and expected-OID CAS; no force, tags, deletion, prune, mirror, or multiple refs; post-verify and reconcile.
+1. Stage the exact tree. Verify no `board/` or `apps/*/data/` runtime state is staged. Compute `git write-tree`.
+2. Gate the commit: root, parent, tree hash, exact message, ref, identity, no amend, no hooks. Allow only.
+3. Commit with the approved tree. Recompute `git write-tree`; if it changed, stop.
+4. Gate the push: resolved remote URL, one explicit `src:dst` ref, exact commit, expected remote OID. Allow only.
+5. Verify the remote OID before pushing (fast-forward / expected-OID lease). Push one ref with no tags, force, delete, prune, mirror, or multi-ref.
+6. Read back the remote OID. A mismatch or unknown state stops and is reconciled.
 
-If you commit manually outside the factory, record that the factory did not authorize it. Do not push.
+Credentials stay in the git/gh credential helper; never in the repo. The future broker will do this with a one-use token; until then, the manual gate is the record.
 
 ## 12. Stop checklist
 

@@ -1,14 +1,14 @@
-# Program Factory V1 — supervised host
+# Program Factory - Grunt Team — supervised host
 
 `factory/host.mjs` is the V1 facilitator. It is **not** the broker/sandbox
-described in `docs/architecture.md`. It keeps a board, calls the four model
-roles with no tools, asks Argon for decisions, applies an approved bundle, and
+described in `docs/architecture.md`. It keeps a board, calls the configured roles with no tools, asks Frontier
+Intelligence (Argon by default) for decisions, applies an approved bundle, and
 runs the test gate. Run it supervised.
 
 What it does not do:
 
 - it does not isolate the model processes or intercept their tools;
-- it does not make Argon's decision a security boundary;
+- it does not make the permission decision a security boundary;
 - it does not commit or push;
 - it does not run unattended.
 
@@ -16,11 +16,14 @@ What it does not do:
 
 | Role | Model | Use |
 |---|---|---|
+| A1 | `openai-codex/gpt-6.1-sol --thinking high` | frontier architect, task cards, tests, frontier review |
+| A2 | `openai-codex/gpt-6-sol --thinking high` | frontier lead programmer and integrator |
 | B1 | `deepseek/deepseek-flash --thinking max` | backend author |
 | B2 | `deepseek/deepseek-flash --thinking max` | backend reviewer |
 | F1 | `openai-codex/gpt-6-luna` | frontend author |
 | F2 | `openai-codex/gpt-6-luna` | frontend reviewer |
-| Argon | `google/gemini-4-argon` | permission gate |
+| Astra | `openai-codex/gpt-6-astra` | optional independent code review |
+| Frontier Intelligence | `google/gemini-4-argon` by default (Argon) | permission gate |
 
 All calls use `--no-tools --no-mcp --no-session --no-extensions
 --no-context-files`. Prompts are passed as `@file` so long packets do not hit
@@ -37,6 +40,9 @@ node factory/host.mjs event text-annotator PROPOSAL B1 "Contract proposal" tasks
 
 # Call a role. The output is a FILE bundle or a review.
 node factory/host.mjs ask B1 tasks/text-annotator/b1-backend-prompt.md tasks/text-annotator/b1-backend.md
+
+# Optional independent code review (Astra). Claude is handoff-only, not via Pi.
+node factory/host.mjs ask ASTRA tasks/<task>/astra-review-prompt.md tasks/<task>/astra-review.md
 
 # Ask Argon about a packet. --bundle is the exact candidate being approved.
 node factory/host.mjs gate text-annotator patch tasks/text-annotator/argon-patch-prompt.md \
@@ -75,8 +81,27 @@ absolute paths, `..`, backslashes, and paths outside the repo.
 
 The hash covers the event body, including `prev`, so a deleted or edited line is
 detectable by replaying the chain. `verify <task>` recomputes every event hash
-and the `prev` link. The board is evidence, not permission. Only the Argon gate
+and the `prev` link. The board is evidence, not permission. Only the Frontier Intelligence gate
 writes an approval token.
+
+## Super Team mode
+
+The same host runs the frontier pair. A1 and A2 are `ask` roles; the task-card
+gate is a normal `gate` kind. The rule is in `docs/super-team.md`:
+
+- frontier pair owns architecture, the hard code, test design, and integration;
+- no work goes to B1/B2/F1/F2 without an accepted task card;
+- A1 writes the red tests, A2 reviews feasibility, Frontier Intelligence gates the card scope;
+- the grunt patch still needs its own Frontier Intelligence patch packet;
+- A1 reviews the grunt result against the card and tests; a vague card returns
+  to A1, not to the grunt pair.
+
+## Independent review
+
+Astra is the default optional independent reviewer. Claude is a handoff packet
+plus a fresh Claude CLI session; it is not called from Pi. The route, the
+5-minute human-choice timeout, the deny rule, and the one-round degraded
+fallback are in [`docs/independent-review.md`](../docs/independent-review.md).
 
 ## The text-annotator run
 
@@ -104,4 +129,4 @@ artifacts under `tasks/text-annotator/`.
 - The broker/sandbox and one-use packet enforcement in `docs/roadmap.md`.
 - A `gate`/`apply` path that computes and verifies the packet from the live
   tree, not just the bundle text.
-- Commit and push gates, still disabled.
+- Commit and push are manual Frontier Intelligence-gated steps; the host does not automate them.

@@ -83,3 +83,22 @@ Only after the pilot:
 - write the operator guide from the actual run, not the design.
 
 Unattended operation is out of scope until the broker, sandbox, and commit/push gates have been validated against adversarial tests.
+
+## Phase 7 — Super Team pilot (design)
+
+The frontier pair is declared in `config/roles.json` and accepted by
+`factory/host.mjs`; no Super Team task has run. The pilot should:
+
+- run A1/A2 on a real task with a contract and a frontier core;
+- produce at least two task cards, one accepted and one rejected as not narrow
+  enough;
+- run the accepted card through the grunt pair, the card tests, the Argon
+  patch gate, and A1's frontier review;
+- record every time the grunt pair stopped because the card was wrong;
+- measure frontier tokens vs grunt tokens per accepted card;
+- exercise the independent review route: Astra default, Claude handoff, the
+  5-minute human-choice timeout, and the one-round degraded fallback.
+
+**Exit test:** one accepted card passes A1 review without a contract change;
+one rejected card stays on the frontier track; the grunt pair never weakens a
+frontier test; a vague card is returned to A1, not to the grunt pair.

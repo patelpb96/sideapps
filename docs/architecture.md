@@ -1,25 +1,27 @@
-# Architecture
+# Architecture — Grunt Team
 
 ## 1. Status
 
-This is the design plus a V1 supervised build. `apps/text-annotator` exists and passes 26 tests; `factory/host.mjs` keeps a hash-chained board, calls the four roles, asks Argon, applies approved bundles, and runs the test gate.
+This describes the **Grunt Team** mode. The **Super Team** mode is in [`docs/super-team.md`](super-team.md); both share Frontier Intelligence, the board, and the host. **Argon is the default Frontier Intelligence instance**; references to Argon below mean that instance.
 
-The broker, OS sandbox, commit gate, and push gate are still not implemented. The diagrams and gate sequence below remain the target. The V1 host is a facilitator, not the trusted computing base: it does not isolate model processes, and Argon's allow token is checked by the host code, not enforced by an OS boundary. Remote `origin` is <https://github.com/patelpb96/sideapps>; `main` is pushed. Push automation is not implemented.
+This is the design plus a V1 supervised build. `apps/text-annotator` exists and passes 26 tests; `factory/host.mjs` keeps a hash-chained board, calls the configured roles (frontier and grunt), asks Argon, applies approved bundles, and runs the test gate.
+
+The broker, OS sandbox, commit gate, and push gate are still not implemented. The diagrams and gate sequence below remain the target. The V1 host is a facilitator, not the trusted computing base: it does not isolate model processes, and the Frontier Intelligence allow token is checked by the host code, not enforced by an OS boundary. Remote `origin` is <https://github.com/patelpb96/sideapps>; `main` is pushed. Push automation is not implemented.
 
 ## 2. Principals and authority
 
 There are three layers, and they are deliberately separate:
 
 1. **The user is the principal.** The user sets scope, budget, and stop conditions, and resolves technical disagreements.
-2. **Argon is the permission gate.** `google/gemini-4-argon`, no tools. Argon approves or denies a plan, each persistent patch, the frontend start, the commit, and the push. Argon does not judge technical merit, does not review code, and cannot compute or verify hashes.
+2. **Frontier Intelligence is the permission gate.** The default instance is Argon (`google/gemini-4-argon`, no tools). Frontier intelligence must approve or deny a plan, each persistent patch, the frontend start, the task card, the commit, and the push. It does not judge technical merit, does not review code, and cannot compute or verify hashes.
 3. **The four technical agents are the team.** They decide the technical shape: the contract, the task split, the design, the tests, and the review findings. They do not grant permissions.
 
-Argon is not a supervisor-agent. The user asked for a team independent of other supervisory staff; this design has no fifth technical decision-maker. The host is deterministic infrastructure: it routes board events, runs pinned tests, validates packets, and applies approved patches. It does not choose between designs.
+Frontier Intelligence is not a supervisor-agent. The user asked for a team independent of other supervisory staff; this design has no fifth technical decision-maker. The host is deterministic infrastructure: it routes board events, runs pinned tests, validates packets, and applies approved patches. It does not choose between designs.
 
 Two consequences:
 
-- **Argon's approval is policy, not security.** A model saying "allow" does not stop a shell command. Until a host-enforced broker and sandbox exist, every approval is an instruction, not a boundary. Do not call this secure.
-- **The board is evidence, not permission.** A unanimous decision on the board does not authorize a filesystem change. Only an Argon packet does, and only the broker may consume it.
+- **Frontier Intelligence approval is policy, not security.** A model saying "allow" does not stop a shell command. Until a host-enforced broker and sandbox exist, every approval is an instruction, not a boundary. Do not call this secure.
+- **The board is evidence, not permission.** A unanimous decision on the board does not authorize a filesystem change. Only a Frontier Intelligence packet (Argon by default) does, and only the broker may consume it.
 
 ## 3. Team and pairing
 
@@ -252,6 +254,10 @@ A normal plan or patch denial is a review result, not a task failure.
 Preserve evidence. Do not resubmit automatically. Involve the user and, for security issues, stop the task.
 
 For any stop, report the exact state. Do not clean up, repair, or retry without a new approval. Scratch cleanup is itself a persistent operation and needs its own approval.
+
+## 12.5 Independent code review
+
+Technical code review is separate from permission. The default optional independent reviewer is Astra (`openai-codex/gpt-6-astra`); Claude is a handoff packet plus a fresh Claude CLI session, not a Pi call. If a human choice is needed, wait at most 5 minutes; no reply means Astra; if Astra is unavailable, deny the review. If review cannot happen, save locally, run one degraded round with the active project model, mark it not independent, and leave the notes for the independent review. Priority 1 on the user's return. Full policy: [`docs/independent-review.md`](independent-review.md).
 
 ## 13. Repository boundary
 

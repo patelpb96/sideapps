@@ -1,0 +1,45 @@
+{
+  "status": "policy",
+  "notice": "Operational policy for the manual V1. It is not an enforcement boundary.",
+  "permission_gate": {
+    "role": "Frontier Intelligence",
+    "default_instance": "Argon",
+    "model": "google/gemini-4-argon",
+    "tools": []
+  },
+  "independent_review": {
+    "default": "astra",
+    "required_when": [
+      "frontier core code",
+      "final integration",
+      "security boundary or credential path",
+      "destructive operation",
+      "contract, schema, or dependency change",
+      "tests written by the same model that wrote the code",
+      "user or A1 marks the patch high-risk"
+    ],
+    "astra": {
+      "model": "openai-codex/gpt-6-astra",
+      "via": "pi",
+      "command": "node factory/host.mjs ask ASTRA <prompt> <out>"
+    },
+    "claude": {
+      "model": "anthropic/claude-opus-5-5",
+      "via": "claude-cli-handoff",
+      "not_via_pi": true,
+      "packet": "templates/independent-review.md"
+    },
+    "human_choice_timeout_seconds": 300,
+    "timeout_default": "astra",
+    "astra_unavailable": "deny-review",
+    "deny_means": "not review-complete; no integration or push; local checkpoint allowed",
+    "degraded": {
+      "trigger": "review is required but cannot be performed",
+      "save": "local checkpoint; no push",
+      "review_rounds": 1,
+      "reviewer": "active project model",
+      "label": "degraded-not-independent",
+      "after": "store packet, notes, and checkpoint in tasks/<task>/review-packets; priority 1 on user return"
+    }
+  }
+}

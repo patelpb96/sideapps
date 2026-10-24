@@ -10,6 +10,7 @@ These diagrams describe the target gate sequence. The V1 implementation is `fact
 | Team and authority topology | `docs/flow.team.json` | `docs/flowchart-team.svg` |
 | Plan gate loop | `docs/flow.plan.json` | `docs/flowchart-plan.svg` |
 | Patch gate loop | `docs/flow.patch.json` | `docs/flowchart-patch.svg` |
+| Super Team | `docs/flow.super.json` | `docs/flowchart-super.svg` |
 
 All three are **design-only**. Nothing in them is implemented or enforced.
 
@@ -104,6 +105,22 @@ The back edge from the loop box to the reviewer is drawn. A denial is a review r
 The two loop nodes draw the return path back to the reviewer: `rev` for review/test findings and `rev-argon` for Argon findings. A denial is a review result, not a task failure. Only a critical security or runtime issue is a hard stop.
 
 The patch gate is the same for both pairs. Backend and frontend differ in *what* they build, not in *how* a patch is authorized.
+
+## Reading the Super Team diagram
+
+`flowchart-super.svg` adds the frontier pair and the delegation boundary. The Argon lane is the **Frontier Intelligence** gate; Argon is the default instance.
+
+- A1/A2 own architecture, the hard code, test design, and integration;
+- A1 writes a task card and red tests; A2 reviews feasibility;
+- the **Narrow enough?** decision is the delegation gate;
+- if the task is not narrow, it stays on the frontier track;
+- Argon gates the task card scope before the grunt pair starts;
+- the grunt patch still goes through the exact patch gate;
+- A1 reviews the grunt result against the card and tests, not just the green
+  test run;
+- a vague card returns to A1, not to the grunt pair.
+
+Full rule: [`docs/super-team.md`](super-team.md). A1's frontier review is not the independent review layer; high-risk patches also use Astra or the Claude handoff per [`docs/independent-review.md`](independent-review.md).
 
 ## The generated warnings
 

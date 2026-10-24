@@ -1,6 +1,6 @@
 # Task — Text Annotator V1
 
-The first program built through the factory. The app lives at
+The first program built by the Grunt Team. The app lives at
 `apps/text-annotator`.
 
 ## Artifacts

@@ -1,0 +1,370 @@
+{
+  "version": 1,
+  "title": "Program Factory — Super Team: frontier leads, grunt squad executes curated cards",
+  "lanes": [
+    {
+      "id": "user",
+      "name": "User",
+      "kind": "human"
+    },
+    {
+      "id": "frontier",
+      "name": "Frontier pair (A1 + A2)",
+      "kind": "agent"
+    },
+    {
+      "id": "grunt",
+      "name": "Grunt squad (B1/B2/F1/F2)",
+      "kind": "agent"
+    },
+    {
+      "id": "argon",
+      "name": "Frontier Intelligence (Argon)",
+      "kind": "agent"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "u0",
+      "primitive": "trigger-manual",
+      "label": "Brief + budget",
+      "lane": "user",
+      "props": {
+        "actor": "User"
+      }
+    },
+    {
+      "id": "f0",
+      "primitive": "agent",
+      "label": "A1/A2: architecture, contract, risk split",
+      "lane": "frontier",
+      "props": {
+        "actor": "A1 anthropic/claude-opus-5-5 · A2 openai-codex/gpt-6.1-sol",
+        "why": "frontier time goes to ambiguity and hard design, not volume"
+      }
+    },
+    {
+      "id": "f1",
+      "primitive": "decision",
+      "label": "Plan agreed?",
+      "lane": "frontier",
+      "props": {
+        "condition": "A1 proposes; A2 reviews feasibility"
+      }
+    },
+    {
+      "id": "u1",
+      "primitive": "escalate",
+      "label": "Block: user resolves",
+      "lane": "user",
+      "props": {
+        "actor": "User"
+      }
+    },
+    {
+      "id": "a0",
+      "primitive": "approval",
+      "label": "Frontier Intelligence: plan gate",
+      "lane": "argon",
+      "props": {
+        "binds": "scope, contract, frontier/grunt split",
+        "on_findings": "revise plan; up to 3 Argon rounds",
+        "hard_stop": "critical security/runtime only",
+        "max": "3 Argon plan rounds"
+      }
+    },
+    {
+      "id": "f2",
+      "primitive": "subprocess",
+      "label": "Frontier core: build + cross-review + per-patch gate",
+      "lane": "frontier",
+      "props": {
+        "actor": "A2 builds; A1 reviews; same exact patch gate as the Grunt Team",
+        "scope": "architecture, hard modules, integration seams",
+        "max": "frontier budget",
+        "until": "core is ready for carding"
+      }
+    },
+    {
+      "id": "f3",
+      "primitive": "agent",
+      "label": "A1: task card + red tests",
+      "lane": "frontier",
+      "props": {
+        "binds": "files, interfaces, non-goals, budget, exact test commands",
+        "why": "a task is delegable only when the diff shape is already known"
+      }
+    },
+    {
+      "id": "f4",
+      "primitive": "review",
+      "label": "A2: card feasibility review",
+      "lane": "frontier",
+      "props": {
+        "why": "second frontier model checks the card is implementable as written"
+      }
+    },
+    {
+      "id": "d0",
+      "primitive": "decision",
+      "label": "Narrow enough?",
+      "lane": "frontier",
+      "props": {
+        "condition": "exact files, no open design, red tests, patch budget, review pair"
+      }
+    },
+    {
+      "id": "a1",
+      "primitive": "approval",
+      "label": "Frontier Intelligence: task-card gate",
+      "lane": "argon",
+      "props": {
+        "binds": "exact files, tests, budget, stop conditions",
+        "on_findings": "A1 narrows or redesigns; up to 3 rounds",
+        "hard_stop": "critical security/runtime only",
+        "max": "3 Argon task-card rounds"
+      }
+    },
+    {
+      "id": "g0",
+      "primitive": "subprocess",
+      "label": "Grunt task: implement + review + per-patch gate",
+      "lane": "grunt",
+      "props": {
+        "actor": "B1/B2 backend or F1/F2 frontend; one author, different reviewer",
+        "scope": "only the card's files and interfaces; no contract changes",
+        "tests": "frontier tests are not weakened",
+        "max": "3 grunt rounds",
+        "until": "passes frontier review"
+      }
+    },
+    {
+      "id": "f6",
+      "primitive": "review",
+      "label": "A1: frontier review vs card + tests",
+      "lane": "frontier",
+      "props": {
+        "why": "tests passing is necessary, not sufficient; check intent and scope",
+        "rejects": "unnecessary changes, weak tests, scope creep, card mismatch"
+      }
+    },
+    {
+      "id": "d1",
+      "primitive": "decision",
+      "label": "Frontier review passes?",
+      "lane": "frontier",
+      "props": {
+        "condition": "implementation matches the card and does not redesign"
+      }
+    },
+    {
+      "id": "f8",
+      "primitive": "agent",
+      "label": "A2: integrate + full tests",
+      "lane": "frontier",
+      "props": {
+        "actor": "Frontier integrator",
+        "why": "integration stays with the frontier pair"
+      }
+    },
+    {
+      "id": "a2",
+      "primitive": "approval",
+      "label": "Frontier Intelligence: commit",
+      "lane": "argon",
+      "props": {
+        "binds": "root, parent, tree, message, ref, identity"
+      }
+    },
+    {
+      "id": "a3",
+      "primitive": "approval",
+      "label": "Frontier Intelligence: push",
+      "lane": "argon",
+      "props": {
+        "binds": "URL, one ref, commit, expected remote OID"
+      }
+    },
+    {
+      "id": "e0",
+      "primitive": "end",
+      "label": "Done",
+      "lane": "frontier",
+      "props": {}
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "kind": "sequence",
+      "label": "",
+      "from": "u0",
+      "to": "f0",
+      "fromPort": "out"
+    },
+    {
+      "id": "e2",
+      "kind": "sequence",
+      "label": "",
+      "from": "f0",
+      "to": "f1",
+      "fromPort": "out"
+    },
+    {
+      "id": "e3",
+      "kind": "error",
+      "label": "no",
+      "from": "f1",
+      "to": "u1",
+      "fromPort": "false"
+    },
+    {
+      "id": "e4",
+      "kind": "sequence",
+      "label": "yes",
+      "from": "f1",
+      "to": "a0",
+      "fromPort": "true"
+    },
+    {
+      "id": "e5",
+      "kind": "loop",
+      "label": "findings",
+      "from": "a0",
+      "to": "f0",
+      "fromPort": "false"
+    },
+    {
+      "id": "e6",
+      "kind": "sequence",
+      "label": "allow",
+      "from": "a0",
+      "to": "f2",
+      "fromPort": "true"
+    },
+    {
+      "id": "e7",
+      "kind": "sequence",
+      "label": "",
+      "from": "f2",
+      "to": "f3",
+      "fromPort": "out"
+    },
+    {
+      "id": "e8",
+      "kind": "sequence",
+      "label": "",
+      "from": "f3",
+      "to": "f4",
+      "fromPort": "out"
+    },
+    {
+      "id": "e9",
+      "kind": "sequence",
+      "label": "",
+      "from": "f4",
+      "to": "d0",
+      "fromPort": "out"
+    },
+    {
+      "id": "e12",
+      "kind": "sequence",
+      "label": "yes",
+      "from": "d0",
+      "to": "a1",
+      "fromPort": "true"
+    },
+    {
+      "id": "e13",
+      "kind": "loop",
+      "label": "findings",
+      "from": "a1",
+      "to": "f3",
+      "fromPort": "false"
+    },
+    {
+      "id": "e14",
+      "kind": "sequence",
+      "label": "allow",
+      "from": "a1",
+      "to": "g0",
+      "fromPort": "true"
+    },
+    {
+      "id": "e15",
+      "kind": "sequence",
+      "label": "",
+      "from": "g0",
+      "to": "f6",
+      "fromPort": "out"
+    },
+    {
+      "id": "e16",
+      "kind": "sequence",
+      "label": "",
+      "from": "f6",
+      "to": "d1",
+      "fromPort": "out"
+    },
+    {
+      "id": "e20",
+      "kind": "sequence",
+      "label": "pass",
+      "from": "d1",
+      "to": "f8",
+      "fromPort": "true"
+    },
+    {
+      "id": "e21",
+      "kind": "sequence",
+      "label": "",
+      "from": "f8",
+      "to": "a2",
+      "fromPort": "out"
+    },
+    {
+      "id": "e22",
+      "kind": "sequence",
+      "label": "allow",
+      "from": "a2",
+      "to": "a3",
+      "fromPort": "true"
+    },
+    {
+      "id": "e23",
+      "kind": "sequence",
+      "label": "allow",
+      "from": "a3",
+      "to": "e0",
+      "fromPort": "true"
+    },
+    {
+      "id": "e10",
+      "kind": "loop",
+      "label": "not delegable: keep on frontier",
+      "from": "d0",
+      "to": "f2",
+      "fromPort": "false"
+    },
+    {
+      "id": "e17",
+      "kind": "loop",
+      "label": "revise (≤3)",
+      "from": "d1",
+      "to": "g0",
+      "fromPort": "false"
+    },
+    {
+      "id": "e18",
+      "kind": "loop",
+      "label": "card vague: redesign",
+      "from": "d1",
+      "to": "f3",
+      "fromPort": "error"
+    }
+  ],
+  "meta": {
+    "source": "Program Factory - Super Team design",
+    "interpreter": "authored"
+  }
+}

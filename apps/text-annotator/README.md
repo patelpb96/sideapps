@@ -1,7 +1,7 @@
 # Text Annotator V1
 
 A local web app that loads a document and labels spans of text. It is the first
-test program built with the program-factory V1.
+test program built by the Grunt Team.
 
 ![Text Annotator](../../tasks/text-annotator/evidence/ui.png)
 

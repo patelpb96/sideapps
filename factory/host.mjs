@@ -40,6 +40,21 @@ const LAUNCHER = join(homedir(), '.pi', 'agent', 'bin', 'pi-launcher.js');
 const MAX_MODEL_BYTES = 64 * 1024 * 1024;
 
 const ROLES = {
+  A1: {
+    model: 'openai-codex/gpt-6.1-sol',
+    flags: ['--thinking', 'high'],
+    system: 'You are A1, the frontier architect. You have no tools. Plan, design tests, and review.',
+  },
+  A2: {
+    model: 'openai-codex/gpt-6-sol',
+    flags: ['--thinking', 'high'],
+    system: 'You are A2, the frontier lead programmer. You have no tools. Implement, integrate, and review.',
+  },
+  ASTRA: {
+    model: 'openai-codex/gpt-6-astra',
+    flags: ['--thinking', 'high'],
+    system: 'You are Astra, an independent code reviewer. You have no tools. Return findings only, with severity and exact evidence.',
+  },
   B1: {
     model: 'deepseek/deepseek-flash',
     flags: ['--thinking', 'max'],
@@ -60,6 +75,7 @@ const ROLES = {
     flags: [],
     system: 'You are F2, the independent frontend reviewer. You have no tools. Return findings only.',
   },
+  // Argon is the default Frontier Intelligence instance.
   ARGON: {
     model: 'google/gemini-4-argon',
     flags: [],
@@ -71,7 +87,7 @@ const ID = /^[a-z0-9][a-z0-9-]{0,62}$/;
 const EVENT_TYPES = new Set([
   'TASK', 'NEED', 'QUESTION', 'PROPOSAL', 'DECISION', 'ACK', 'NACK',
   'OBJECTION', 'CHANGE_REQUEST', 'EVIDENCE', 'READINESS', 'HANDOFF',
-  'ESCALATION', 'PLAN', 'REVIEW', 'GATE', 'PATCH', 'APPLY', 'TEST', 'ASK', 'PUSH', 'COMMIT',
+  'ESCALATION', 'PLAN', 'REVIEW', 'GATE', 'PATCH', 'APPLY', 'TEST', 'ASK', 'PUSH', 'COMMIT', 'TASK_CARD', 'DELEGATION',
 ]);
 
 function sha256(value) {

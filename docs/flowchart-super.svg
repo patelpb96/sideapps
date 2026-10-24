@@ -1,0 +1,296 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="4955" height="584" viewBox="0 0 4955 584" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Inter, Roboto, sans-serif">
+<defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#9b9b93"/>
+    </marker>
+    <marker id="arrow-select" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#3b5bdb"/>
+    </marker>
+    <marker id="arrow-danger" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#b42318"/>
+    </marker>
+  </defs>
+<rect width="4955" height="584" fill="#ffffff"/>
+<g class="lane" data-lane="user">
+    <rect x="0" y="34" width="4955" height="120" fill="#fcfcfa" stroke="#d8d8d1" stroke-width="1"/>
+    <rect x="0" y="34" width="196" height="120" fill="#fcfcfa"/>
+    <line x1="196" y1="34" x2="196" y2="154" stroke="#d8d8d1" stroke-width="1" opacity="0.7"/>
+    <text x="18" y="91" font-size="9" font-weight="700" letter-spacing="0.8" fill="#b45309" opacity="0.9">HUMAN</text>
+    <text x="18" y="107" font-size="13" font-weight="600" fill="#1b1b19">User</text>
+  </g>
+<g class="lane" data-lane="frontier">
+    <rect x="0" y="162" width="4955" height="136" fill="#f6f6f2" stroke="#d8d8d1" stroke-width="1"/>
+    <rect x="0" y="162" width="196" height="136" fill="#f6f6f2"/>
+    <line x1="196" y1="162" x2="196" y2="298" stroke="#d8d8d1" stroke-width="1" opacity="0.7"/>
+    <text x="18" y="227" font-size="9" font-weight="700" letter-spacing="0.8" fill="#1d4ed8" opacity="0.9">MODEL</text>
+    <text x="18" y="243" font-size="13" font-weight="600" fill="#1b1b19">Frontier pair (A1…</text>
+  </g>
+<g class="lane" data-lane="grunt">
+    <rect x="0" y="306" width="4955" height="118" fill="#fcfcfa" stroke="#d8d8d1" stroke-width="1"/>
+    <rect x="0" y="306" width="196" height="118" fill="#fcfcfa"/>
+    <line x1="196" y1="306" x2="196" y2="424" stroke="#d8d8d1" stroke-width="1" opacity="0.7"/>
+    <text x="18" y="362" font-size="9" font-weight="700" letter-spacing="0.8" fill="#1d4ed8" opacity="0.9">MODEL</text>
+    <text x="18" y="378" font-size="13" font-weight="600" fill="#1b1b19">Grunt squad (B1/B…</text>
+  </g>
+<g class="lane" data-lane="argon">
+    <rect x="0" y="432" width="4955" height="118" fill="#f6f6f2" stroke="#d8d8d1" stroke-width="1"/>
+    <rect x="0" y="432" width="196" height="118" fill="#f6f6f2"/>
+    <line x1="196" y1="432" x2="196" y2="550" stroke="#d8d8d1" stroke-width="1" opacity="0.7"/>
+    <text x="18" y="488" font-size="9" font-weight="700" letter-spacing="0.8" fill="#1d4ed8" opacity="0.9">MODEL</text>
+    <text x="18" y="504" font-size="13" font-weight="600" fill="#1b1b19">Frontier Intellig…</text>
+  </g>
+<g class="edge" data-edge="e1">
+    <path d="M 318 94 L 338 94 Q 347 94 347 103 L 347 221 Q 347 230 356 230 L 376 230" fill="none" stroke="#9b9b93" stroke-width="1.5" stroke-linecap="round" marker-end="url(#arrow)"/>
+    
+  </g>
+<g class="edge" data-edge="e2">
+    <path d="M 656 230 L 685 230 L 685 230 L 714 230" fill="none" stroke="#9b9b93" stroke-width="1.5" stroke-linecap="round" marker-end="url(#arrow)"/>
+    
+  </g>
+<g class="edge" data-edge="e3">
+    <path d="M 910 248.5 L 951 248.5 Q 960 248.5 960 239.5 L 960 103 Q 960 94 969 94 L 1009 94" fill="none" stroke="#b42318" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="5 4" marker-end="url(#arrow-danger)"/>
+    <g class="edge-label"><rect x="949.8" y="163.2" width="20.4" height="15" fill="#ffffff" stroke="#b42318" stroke-width="0.8"/><text x="960.0" y="174.2" text-anchor="middle" font-size="9.5" font-weight="600" fill="#b42318">no</text></g>
+  </g>
+<g class="edge" data-edge="e4">
+    <path d="M 910 216.6 L 930 216.6 Q 939 216.6 939 225.6 L 939 482 Q 939 491 948 491 L 968 491" fill="none" stroke="#9b9b93" stroke-width="1.5" stroke-linecap="round" marker-end="url(#arrow)"/>
+    <g class="edge-label"><rect x="926.2" y="345.8" width="25.6" height="15" fill="#ffffff" stroke="#9b9b93" stroke-width="0.8"/><text x="939.0" y="356.8" text-anchor="middle" font-size="9.5" font-weight="600" fill="#9b9b93">yes</text></g>
+  </g>
+<g class="edge" data-edge="e5">
+    <path d="M 1261 503.8 L 1278 503.8 Q 1287 503.8 1287 494.8 L 1287 376 Q 1287 367 1278 367 L 359 367 Q 350 367 350 358 L 350 239 Q 350 230 359 230 L 376 230" fill="none" stroke="#b45309" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
+    <g class="edge-label"><rect x="792.7" y="359.0" width="51.6" height="15" fill="#ffffff" stroke="#b45309" stroke-width="0.8"/><text x="818.5" y="370.0" text-anchor="middle" font-size="9.5" font-weight="600" fill="#b45309">findings</text></g>
+  </g>
+<g class="edge" data-edge="e6">
+    <path d="M 1261 481.7 L 1281 481.7 Q 1290 481.7 1290 472.7 L 1290 239 Q 1290 230 1299 230 L 1319 230" fill="none" stroke="#9b9b93" stroke-width="1.5" stroke-linecap="round" marker-end="url(#arrow)"/>
+    <g class="edge-label"><rect x="1272.0" y="347.9" width="36.0" height="15" fill="#ffffff" stroke="#9b9b93" stroke-width="0.8"/><text x="1290.0" y="358.9" text-anchor="middle" font-size="9.5" font-weight="600" fill="#9b9b93">allow</text></g>
+  </g>
+<g class="edge" data-edge="e7">
+    <path d="M 1592 230 L 1621 230 L 1621 230 L 1650 230" fill="none" stroke="#9b9b93" stroke-width="1.5" stroke-linecap="round" marker-end="url(#arrow)"/>
+    
+  </g>
+<g class="edge" data-edge="e8">
+    <path d="M 1896 230 L 1925 230 L 1925 230 L 1954 230" fill="none" stroke="#9b9b93" stroke-width="1.5" stroke-linecap="round" marker-end="url(#arrow)"/>
+    
+  </g>
+<g class="edge" data-edge="e9">
+    <path d="M 2213 230 L 2242 230 L 2242 230 L 2271 230" fill="none" stroke="#9b9b93" stroke-width="1.5" stroke-linecap="round" marker-end="url(#arrow)"/>
+    
+  </g>
+<g class="edge" data-edge="e12">
+    <path d="M 2473 216.6 L 2493 216.6 Q 2502 216.6 2502 225.6 L 2502 482 Q 2502 491 2511 491 L 2531 491" fill="none" stroke="#9b9b93" stroke-width="1.5" stroke-linecap="round" marker-end="url(#arrow)"/>
+    <g class="edge-label"><rect x="2489.2" y="345.8" width="25.6" height="15" fill="#ffffff" stroke="#9b9b93" stroke-width="0.8"/><text x="2502.0" y="356.8" text-anchor="middle" font-size="9.5" font-weight="600" fill="#9b9b93">yes</text></g>
+  </g>
+<g class="edge" data-edge="e13">
+    <path d="M 2824 507.3 L 2841 507.3 Q 2850 507.3 2850 498.3 L 2850 378 Q 2850 369 2841 369 L 1633 369 Q 1624 369 1624 360 L 1624 239 Q 1624 230 1633 230 L 1650 230" fill="none" stroke="#b45309" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
+    <g class="edge-label"><rect x="2211.2" y="361.0" width="51.6" height="15" fill="#ffffff" stroke="#b45309" stroke-width="0.8"/><text x="2237.0" y="372.0" text-anchor="middle" font-size="9.5" font-weight="600" fill="#b45309">findings</text></g>
+  </g>
+<g class="edge" data-edge="e14">
+    <path d="M 2824 479.2 L 2844 479.2 Q 2853 479.2 2853 470.2 L 2853 374 Q 2853 365 2862 365 L 2882 365" fill="none" stroke="#9b9b93" stroke-width="1.5" stroke-linecap="round" marker-end="url(#arrow)"/>
+    <g class="edge-label"><rect x="2835.0" y="414.1" width="36.0" height="15" fill="#ffffff" stroke="#9b9b93" stroke-width="0.8"/><text x="2853.0" y="425.1" text-anchor="middle" font-size="9.5" font-weight="600" fill="#9b9b93">allow</text></g>
+  </g>
+<g class="edge" data-edge="e15">
+    <path d="M 3175 365 L 3195 365 Q 3204 365 3204 356 L 3204 239 Q 3204 230 3213 230 L 3233 230" fill="none" stroke="#9b9b93" stroke-width="1.5" stroke-linecap="round" marker-end="url(#arrow)"/>
+    
+  </g>
+<g class="edge" data-edge="e16">
+    <path d="M 3506 230 L 3535 230 L 3535 230 L 3564 230" fill="none" stroke="#9b9b93" stroke-width="1.5" stroke-linecap="round" marker-end="url(#arrow)"/>
+    
+  </g>
+<g class="edge" data-edge="e20">
+    <path d="M 3774 215.3 L 3795.6 215.3 Q 3803 215.3 3803 222.6 L 3803 222.6 Q 3803 230 3810.4 230 L 3832 230" fill="none" stroke="#9b9b93" stroke-width="1.5" stroke-linecap="round" marker-end="url(#arrow)"/>
+    <g class="edge-label"><rect x="3773.1" y="207.3" width="30.8" height="15" fill="#ffffff" stroke="#9b9b93" stroke-width="0.8"/><text x="3788.5" y="218.3" text-anchor="middle" font-size="9.5" font-weight="600" fill="#9b9b93">pass</text></g>
+  </g>
+<g class="edge" data-edge="e21">
+    <path d="M 4085 230 L 4105 230 Q 4114 230 4114 239 L 4114 482 Q 4114 491 4123 491 L 4143 491" fill="none" stroke="#9b9b93" stroke-width="1.5" stroke-linecap="round" marker-end="url(#arrow)"/>
+    
+  </g>
+<g class="edge" data-edge="e22">
+    <path d="M 4416 481.7 L 4440.4 481.7 Q 4445 481.7 4445 486.4 L 4445 486.4 Q 4445 491 4449.6 491 L 4474 491" fill="none" stroke="#9b9b93" stroke-width="1.5" stroke-linecap="round" marker-end="url(#arrow)"/>
+    <g class="edge-label"><rect x="4412.5" y="473.7" width="36.0" height="15" fill="#ffffff" stroke="#9b9b93" stroke-width="0.8"/><text x="4430.5" y="484.7" text-anchor="middle" font-size="9.5" font-weight="600" fill="#9b9b93">allow</text></g>
+  </g>
+<g class="edge" data-edge="e23">
+    <path d="M 4733 481.7 L 4753 481.7 Q 4762 481.7 4762 472.7 L 4762 239 Q 4762 230 4771 230 L 4791 230" fill="none" stroke="#9b9b93" stroke-width="1.5" stroke-linecap="round" marker-end="url(#arrow)"/>
+    <g class="edge-label"><rect x="4744.0" y="347.9" width="36.0" height="15" fill="#ffffff" stroke="#9b9b93" stroke-width="0.8"/><text x="4762.0" y="358.9" text-anchor="middle" font-size="9.5" font-weight="600" fill="#9b9b93">allow</text></g>
+  </g>
+<g class="edge" data-edge="e10">
+    <path d="M 2473 248.5 L 2494.3 248.5 Q 2499 248.5 2499 243.7 L 2499 243.7 Q 2499 239 2494.3 239 L 1297.5 239 Q 1293 239 1293 234.5 L 1293 234.5 Q 1293 230 1297.5 230 L 1319 230" fill="none" stroke="#b45309" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
+    <g class="edge-label"><rect x="1810.4" y="231.0" width="171.2" height="15" fill="#ffffff" stroke="#b45309" stroke-width="0.8"/><text x="1896.0" y="242.0" text-anchor="middle" font-size="9.5" font-weight="600" fill="#b45309">not delegable: keep on frontier</text></g>
+  </g>
+<g class="edge" data-edge="e17">
+    <path d="M 3774 250.2 L 3791 250.2 Q 3800 250.2 3800 259.2 L 3800 299 Q 3800 308 3791 308 L 2865 308 Q 2856 308 2856 317 L 2856 356 Q 2856 365 2865 365 L 2882 365" fill="none" stroke="#b45309" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
+    <g class="edge-label"><rect x="3294.4" y="300.0" width="67.2" height="15" fill="#ffffff" stroke="#b45309" stroke-width="0.8"/><text x="3328.0" y="311.0" text-anchor="middle" font-size="9.5" font-weight="600" fill="#b45309">revise (≤3)</text></g>
+  </g>
+<g class="edge" data-edge="e18">
+    <path d="M 3669 276 L 3686 276 Q 3695 276 3695 267 L 3695 262 Q 3695 253 3686 253 L 1633 253 Q 1624 253 1624 244 L 1624 239 Q 1624 230 1633 230 L 1650 230" fill="none" stroke="#b45309" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
+    <g class="edge-label"><rect x="2602.5" y="245.0" width="114.0" height="15" fill="#ffffff" stroke="#b45309" stroke-width="0.8"/><text x="2659.5" y="256.0" text-anchor="middle" font-size="9.5" font-weight="600" fill="#b45309">card vague: redesign</text></g>
+  </g>
+<g class="node" data-node="u0" data-shape="circle" transform="translate(146,56)">
+    <ellipse cx="86" cy="38" rx="85" ry="37" fill="#ffffff" stroke="#7c3aed" stroke-width="1.4"/>
+    <g transform="translate(14,28.5) scale(0.86)" fill="none" stroke="#7c3aed" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"><path d="M5.5 3.2 12.5 8 5.5 12.8Z"/></g>
+    <text font-size="12.5" font-weight="520" fill="#1b1b19"><tspan x="41" y="36.5">Brief + budget</tspan></text>
+    <text x="41" y="53.5" font-size="8.5" font-weight="600" letter-spacing="0.6" fill="#7c3aed" opacity="0.9">MANUAL START</text>
+    
+    
+    
+    
+  </g>
+<g class="node" data-node="f0" data-shape="round" transform="translate(376,193)">
+    <rect x="1" y="1" width="278" height="72" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.4"/><rect x="5" y="5" width="270" height="64" fill="none" stroke="#1d4ed8" stroke-width="1" opacity="0.45"/>
+    <g transform="translate(14,20.0) scale(0.86)" fill="none" stroke="#1d4ed8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"><path d="M3.4 8a4.6 4.6 0 0 1 9.2 0 M12.6 8a4.6 4.6 0 0 1-9.2 0 M10.9 4.9 12.8 6.6 11 8.2"/></g>
+    <text font-size="12.5" font-weight="520" fill="#1b1b19"><tspan x="41" y="28.0">A1/A2: architecture, contract,</tspan><tspan x="41" y="43.0">risk split</tspan></text>
+    <text x="41" y="60.0" font-size="8.5" font-weight="600" letter-spacing="0.6" fill="#1d4ed8" opacity="0.9">AGENT LOOP</text>
+    
+    
+    
+    
+  </g>
+<g class="node" data-node="f1" data-shape="diamond" transform="translate(714,188)">
+    <path d="M 98 1 L 195 42 L 98 83 L 1 42 Z" fill="#ffffff" stroke="#475569" stroke-width="1.4"/>
+    
+    <text font-size="12.5" font-weight="520" fill="#1b1b19"><tspan x="98" y="39.5" text-anchor="middle">Plan agreed?</tspan></text>
+    
+    
+    
+    
+    
+  </g>
+<g class="node" data-node="u1" data-shape="rect" transform="translate(1009,65)">
+    <rect x="1" y="1" width="210" height="56" fill="#ffffff" stroke="#57606a" stroke-width="1.4"/>
+    <g transform="translate(14,19.5) scale(0.86)" fill="none" stroke="#57606a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"><path d="M8 13.2V3.4 M4.6 6.8 8 3.4l3.4 3.4"/></g>
+    <text font-size="12.5" font-weight="520" fill="#1b1b19"><tspan x="41" y="27.5">Block: user resolves</tspan></text>
+    <text x="41" y="44.5" font-size="8.5" font-weight="600" letter-spacing="0.6" fill="#57606a" opacity="0.9">ESCALATE</text>
+    
+    
+    
+    
+  </g>
+<g class="node" data-node="a0" data-shape="hex" transform="translate(968,462)">
+    <path d="M 18 1 H 275 L 292 29 L 275 57 H 18 L 1 29 Z" fill="#ffffff" stroke="#b45309" stroke-width="1.4"/>
+    <g transform="translate(14,19.5) scale(0.86)" fill="none" stroke="#b45309" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"><path d="M3.4 8.3 6.5 11.3 12.6 4.5"/></g>
+    <text font-size="12.5" font-weight="520" fill="#1b1b19"><tspan x="41" y="27.5">Frontier Intelligence: plan gate</tspan></text>
+    <text x="41" y="44.5" font-size="8.5" font-weight="600" letter-spacing="0.6" fill="#b45309" opacity="0.9">APPROVAL GATE</text>
+    
+    
+    
+    
+  </g>
+<g class="node" data-node="f2" data-shape="rect" transform="translate(1319,193)">
+    <rect x="1" y="1" width="271" height="72" fill="#ffffff" stroke="#475569" stroke-width="1.4"/>
+    <g transform="translate(14,20.0) scale(0.86)" fill="none" stroke="#475569" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"><path d="M3 3.8h10v8.4H3Z"/></g>
+    <text font-size="12.5" font-weight="520" fill="#1b1b19"><tspan x="41" y="28.0">Frontier core: build +</tspan><tspan x="41" y="43.0">cross-review + per-patch gate</tspan></text>
+    <text x="41" y="60.0" font-size="8.5" font-weight="600" letter-spacing="0.6" fill="#475569" opacity="0.9">SUB-WORKFLOW</text>
+    
+    
+    
+    
+  </g>
+<g class="node" data-node="f3" data-shape="round" transform="translate(1650,201)">
+    <rect x="1" y="1" width="244" height="56" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.4"/><rect x="5" y="5" width="236" height="48" fill="none" stroke="#1d4ed8" stroke-width="1" opacity="0.45"/>
+    <g transform="translate(14,19.5) scale(0.86)" fill="none" stroke="#1d4ed8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"><path d="M3.4 8a4.6 4.6 0 0 1 9.2 0 M12.6 8a4.6 4.6 0 0 1-9.2 0 M10.9 4.9 12.8 6.6 11 8.2"/></g>
+    <text font-size="12.5" font-weight="520" fill="#1b1b19"><tspan x="41" y="27.5">A1: task card + red tests</tspan></text>
+    <text x="41" y="44.5" font-size="8.5" font-weight="600" letter-spacing="0.6" fill="#1d4ed8" opacity="0.9">AGENT LOOP</text>
+    
+    
+    
+    
+  </g>
+<g class="node" data-node="f4" data-shape="rect" transform="translate(1954,201)">
+    <rect x="1" y="1" width="257" height="56" fill="#ffffff" stroke="#b45309" stroke-width="1.4"/>
+    <g transform="translate(14,19.5) scale(0.86)" fill="none" stroke="#b45309" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"><path d="M1.7 8s2.7-4.1 6.3-4.1S14.3 8 14.3 8s-2.7 4.1-6.3 4.1S1.7 8 1.7 8 M8 6.2a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 1 0 0-3.6"/></g>
+    <text font-size="12.5" font-weight="520" fill="#1b1b19"><tspan x="41" y="27.5">A2: card feasibility review</tspan></text>
+    <text x="41" y="44.5" font-size="8.5" font-weight="600" letter-spacing="0.6" fill="#b45309" opacity="0.9">REVIEW &amp; SIGN-OFF</text>
+    
+    
+    
+    
+  </g>
+<g class="node" data-node="d0" data-shape="diamond" transform="translate(2271,188)">
+    <path d="M 101 1 L 201 42 L 101 83 L 1 42 Z" fill="#ffffff" stroke="#475569" stroke-width="1.4"/>
+    
+    <text font-size="12.5" font-weight="520" fill="#1b1b19"><tspan x="101" y="39.5" text-anchor="middle">Narrow enough?</tspan></text>
+    
+    
+    
+    
+    
+  </g>
+<g class="node" data-node="a1" data-shape="hex" transform="translate(2531,454)">
+    <path d="M 18 1 H 275 L 292 37 L 275 73 H 18 L 1 37 Z" fill="#ffffff" stroke="#b45309" stroke-width="1.4"/>
+    <g transform="translate(14,20.0) scale(0.86)" fill="none" stroke="#b45309" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"><path d="M3.4 8.3 6.5 11.3 12.6 4.5"/></g>
+    <text font-size="12.5" font-weight="520" fill="#1b1b19"><tspan x="41" y="28.0">Frontier Intelligence: task-card</tspan><tspan x="41" y="43.0">gate</tspan></text>
+    <text x="41" y="60.0" font-size="8.5" font-weight="600" letter-spacing="0.6" fill="#b45309" opacity="0.9">APPROVAL GATE</text>
+    
+    
+    
+    
+  </g>
+<g class="node" data-node="g0" data-shape="rect" transform="translate(2882,328)">
+    <rect x="1" y="1" width="291" height="72" fill="#ffffff" stroke="#475569" stroke-width="1.4"/>
+    <g transform="translate(14,20.0) scale(0.86)" fill="none" stroke="#475569" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"><path d="M3 3.8h10v8.4H3Z"/></g>
+    <text font-size="12.5" font-weight="520" fill="#1b1b19"><tspan x="41" y="28.0">Grunt task: implement + review +</tspan><tspan x="41" y="43.0">per-patch gate</tspan></text>
+    <text x="41" y="60.0" font-size="8.5" font-weight="600" letter-spacing="0.6" fill="#475569" opacity="0.9">SUB-WORKFLOW</text>
+    
+    
+    
+    
+  </g>
+<g class="node" data-node="f6" data-shape="rect" transform="translate(3233,193)">
+    <rect x="1" y="1" width="271" height="72" fill="#ffffff" stroke="#b45309" stroke-width="1.4"/>
+    <g transform="translate(14,20.0) scale(0.86)" fill="none" stroke="#b45309" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"><path d="M1.7 8s2.7-4.1 6.3-4.1S14.3 8 14.3 8s-2.7 4.1-6.3 4.1S1.7 8 1.7 8 M8 6.2a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 1 0 0-3.6"/></g>
+    <text font-size="12.5" font-weight="520" fill="#1b1b19"><tspan x="41" y="28.0">A1: frontier review vs card +</tspan><tspan x="41" y="43.0">tests</tspan></text>
+    <text x="41" y="60.0" font-size="8.5" font-weight="600" letter-spacing="0.6" fill="#b45309" opacity="0.9">REVIEW &amp; SIGN-OFF</text>
+    
+    
+    
+    
+  </g>
+<g class="node" data-node="d1" data-shape="diamond" transform="translate(3564,184)">
+    <path d="M 105 1 L 209 46 L 105 91 L 1 46 Z" fill="#ffffff" stroke="#475569" stroke-width="1.4"/>
+    
+    <text font-size="12.5" font-weight="520" fill="#1b1b19"><tspan x="105" y="36.0" text-anchor="middle">Frontier review</tspan><tspan x="105" y="51.0" text-anchor="middle">passes?</tspan></text>
+    
+    
+    
+    
+    
+  </g>
+<g class="node" data-node="f8" data-shape="round" transform="translate(3832,201)">
+    <rect x="1" y="1" width="251" height="56" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.4"/><rect x="5" y="5" width="243" height="48" fill="none" stroke="#1d4ed8" stroke-width="1" opacity="0.45"/>
+    <g transform="translate(14,19.5) scale(0.86)" fill="none" stroke="#1d4ed8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"><path d="M3.4 8a4.6 4.6 0 0 1 9.2 0 M12.6 8a4.6 4.6 0 0 1-9.2 0 M10.9 4.9 12.8 6.6 11 8.2"/></g>
+    <text font-size="12.5" font-weight="520" fill="#1b1b19"><tspan x="41" y="27.5">A2: integrate + full tests</tspan></text>
+    <text x="41" y="44.5" font-size="8.5" font-weight="600" letter-spacing="0.6" fill="#1d4ed8" opacity="0.9">AGENT LOOP</text>
+    
+    
+    
+    
+  </g>
+<g class="node" data-node="a2" data-shape="hex" transform="translate(4143,462)">
+    <path d="M 18 1 H 255 L 272 29 L 255 57 H 18 L 1 29 Z" fill="#ffffff" stroke="#b45309" stroke-width="1.4"/>
+    <g transform="translate(14,19.5) scale(0.86)" fill="none" stroke="#b45309" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"><path d="M3.4 8.3 6.5 11.3 12.6 4.5"/></g>
+    <text font-size="12.5" font-weight="520" fill="#1b1b19"><tspan x="41" y="27.5">Frontier Intelligence: commit</tspan></text>
+    <text x="41" y="44.5" font-size="8.5" font-weight="600" letter-spacing="0.6" fill="#b45309" opacity="0.9">APPROVAL GATE</text>
+    
+    
+    
+    
+  </g>
+<g class="node" data-node="a3" data-shape="hex" transform="translate(4474,462)">
+    <path d="M 18 1 H 241 L 258 29 L 241 57 H 18 L 1 29 Z" fill="#ffffff" stroke="#b45309" stroke-width="1.4"/>
+    <g transform="translate(14,19.5) scale(0.86)" fill="none" stroke="#b45309" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"><path d="M3.4 8.3 6.5 11.3 12.6 4.5"/></g>
+    <text font-size="12.5" font-weight="520" fill="#1b1b19"><tspan x="41" y="27.5">Frontier Intelligence: push</tspan></text>
+    <text x="41" y="44.5" font-size="8.5" font-weight="600" letter-spacing="0.6" fill="#b45309" opacity="0.9">APPROVAL GATE</text>
+    
+    
+    
+    
+  </g>
+<g class="node" data-node="e0" data-shape="circle" transform="translate(4791,192)">
+    <ellipse cx="68" cy="38" rx="67" ry="37" fill="#ffffff" stroke="#57606a" stroke-width="1.4"/>
+    <g transform="translate(14,35.5) scale(0.86)" fill="none" stroke="#57606a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"><path d="M5 5h6v6H5Z"/></g>
+    <text font-size="12.5" font-weight="520" fill="#1b1b19"><tspan x="41" y="43.5">Done</tspan></text>
+    
+    
+    
+    
+    
+  </g>
+</svg>
