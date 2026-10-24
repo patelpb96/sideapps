@@ -17,7 +17,7 @@ node --test          # 26 tests
 - App: [`apps/text-annotator`](apps/text-annotator)
 - Host: [`factory/host.mjs`](factory/host.mjs) — board, model calls, Argon gate, bundle apply, test gate. Supervised, not sandboxed.
 - Task record: [`tasks/text-annotator`](tasks/text-annotator) — brief, contract, model bundles, reviews, Argon decisions, readiness hashes, test and browser evidence.
-- The board for the run is `board/text-annotator/events.jsonl` (gitignored, 25 events; `node factory/host.mjs verify text-annotator` checks the chain).
+- The board for the run is `board/text-annotator/events.jsonl` (gitignored; `node factory/host.mjs verify text-annotator` checks the chain).
 
 ## The shape
 
@@ -93,7 +93,7 @@ The focused loop diagrams are [`docs/flowchart-plan.svg`](docs/flowchart-plan.sv
 
 ## Current state
 
-- No remote is configured; no commit has been made.
+- No remote is configured; the initial local commit is `d29e925`. No push.
 - `factory/host.mjs` is a supervised facilitator: it keeps a hash-chained board, calls the four roles with no tools, asks Argon, applies only approved bundles, and runs tests.
 - `apps/text-annotator` is built and tested: 26/26 tests pass; a browser smoke test added a real annotation.
 - The broker, OS sandbox, commit gate, and push gate are still not implemented. The host is not a security boundary.

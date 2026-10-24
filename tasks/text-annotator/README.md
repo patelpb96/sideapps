@@ -39,7 +39,7 @@ The append-only board is `board/text-annotator/events.jsonl` (gitignored).
   keyboard offset form, annotation list/delete, export JSON, error panel.
 - Browser smoke: opened `sample.txt`, added a `Person` annotation for offsets
   0–5, rendered one `<mark>` with text `First`.
-- No commit and no push.
+- Initial local commit `d29e925`; no remote or push.
 
 ## Reproduce
 

@@ -39,9 +39,13 @@ The detailed plan and patch diagrams draw their back edges. The main pipeline us
 - Board: `board/text-annotator/events.jsonl` (22 events, gitignored).
 - Task artifacts: `tasks/text-annotator/` (contract, B1/B2/F1/F2 bundles and reviews, Argon decisions, readiness, evidence).
 
+**Committed**
+
+- Initial local commit `d29e925` (83 files). No remote and no push.
+
 **Still absent**
 
-- OS sandbox, real broker, per-event capabilities, commit/push gates, unattended mode.
+- OS sandbox, real broker, per-event capabilities, commit/push automation, unattended mode.
 
 **Next**
 

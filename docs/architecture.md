@@ -4,7 +4,7 @@
 
 This is the design plus a V1 supervised build. `apps/text-annotator` exists and passes 26 tests; `factory/host.mjs` keeps a hash-chained board, calls the four roles, asks Argon, applies approved bundles, and runs the test gate.
 
-The broker, OS sandbox, commit gate, and push gate are still not implemented. The diagrams and gate sequence below remain the target. The V1 host is a facilitator, not the trusted computing base: it does not isolate model processes, and Argon's allow token is checked by the host code, not enforced by an OS boundary. No remote, commit, or push has been made.
+The broker, OS sandbox, commit gate, and push gate are still not implemented. The diagrams and gate sequence below remain the target. The V1 host is a facilitator, not the trusted computing base: it does not isolate model processes, and Argon's allow token is checked by the host code, not enforced by an OS boundary. No remote or push has been configured; the initial local commit is `d29e925`.
 
 ## 2. Principals and authority
 
