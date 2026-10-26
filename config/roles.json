@@ -54,6 +54,10 @@
       {
         "id": "B1",
         "model": "deepseek/deepseek-flash",
+        "model_options": [
+          "deepseek/deepseek-flash",
+          "mistral/zai-glm-5-3-flash"
+        ],
         "thinking": "max",
         "domain": "backend",
         "default_role": "author"
@@ -61,6 +65,10 @@
       {
         "id": "B2",
         "model": "deepseek/deepseek-flash",
+        "model_options": [
+          "deepseek/deepseek-flash",
+          "mistral/zai-glm-5-3-flash"
+        ],
         "thinking": "max",
         "domain": "backend",
         "default_role": "reviewer"

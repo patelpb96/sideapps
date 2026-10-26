@@ -16,11 +16,13 @@ The rule is not "frontier models are smarter." The rule is **frontier time buys 
 |---|---|---|
 | **A1** | `openai-codex/gpt-6.1-sol` | architecture, scope, contract, task cards, red tests, frontier review |
 | **A2** | `openai-codex/gpt-6-sol` | lead programming, integration, feasibility review, hard modules |
-| **B1/B2** | `deepseek/deepseek-flash --thinking max` | backend grunt author/reviewer |
+| **B1/B2** | default `deepseek/deepseek-flash` with `--thinking max`; optional `mistral/zai-glm-5-3-flash` | backend grunt author/reviewer |
 | **F1/F2** | `openai-codex/gpt-6-luna` | frontend grunt author/reviewer |
 | **Frontier Intelligence** | `google/gemini-4-argon` by default (Argon), no tools | permission gate only |
 | **Host** | `factory/host.mjs` | board, model calls, Frontier Intelligence gates, apply, tests |
 | **User** | — | principal, scope, budget, disputes |
+
+Either backend grunt can select `mistral/zai-glm-5-3-flash` per call with `--model`; DeepSeek remains the default.
 
 A1 and A2 are a frontier pair, not a supervisor layer. They can both write code; the default is one author and the other reviewer per patch. Two frontier sessions check each other: A1 plans and A2 checks feasibility; A2 implements and A1 checks intent. They are not the independent review layer; use Astra or Claude for high-risk patches.
 

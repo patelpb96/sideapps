@@ -99,7 +99,7 @@
       "label": "Backend pair: contract, primitives, tests",
       "lane": "team",
       "props": {
-        "actor": "B1 author / B2 reviewer (DeepSeek Flash max)",
+        "actor": "B1 author / B2 reviewer; DeepSeek Flash max default, mistral/zai-glm-5-3-flash optional per call",
         "why": "frontend code is blocked until the contract is ready"
       }
     },

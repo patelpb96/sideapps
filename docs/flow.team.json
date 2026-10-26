@@ -70,7 +70,7 @@
       "label": "B1 backend author",
       "lane": "team",
       "props": {
-        "actor": "deepseek/deepseek-flash --thinking max",
+        "actor": "deepseek/deepseek-flash --thinking max (default); mistral/zai-glm-5-3-flash (optional)",
         "isolation": "proposal only; host sandbox required"
       }
     },
@@ -80,7 +80,7 @@
       "label": "B2 backend reviewer",
       "lane": "team",
       "props": {
-        "actor": "deepseek/deepseek-flash --thinking max"
+        "actor": "deepseek/deepseek-flash --thinking max (default); mistral/zai-glm-5-3-flash (optional)"
       }
     },
     {

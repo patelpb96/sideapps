@@ -15,7 +15,7 @@
  * Usage:
  *   node factory/host.mjs init <task> [briefFile]
  *   node factory/host.mjs event <task> <type> <actor> <message> [artifact]
- *   node factory/host.mjs ask <role> <promptFile> <outFile>
+ *   node factory/host.mjs ask <role> <promptFile> <outFile> [--model <provider/model>]
  *   node factory/host.mjs gate <task> <kind> <packetFile> <outFile> [--bundle <bundleFile>]
  *   node factory/host.mjs apply <task> <bundleFile>
  *   node factory/host.mjs test <task> <appDir>
@@ -39,6 +39,11 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const LAUNCHER = join(homedir(), '.pi', 'agent', 'bin', 'pi-launcher.js');
 const MAX_MODEL_BYTES = 64 * 1024 * 1024;
 
+const BACKEND_MODEL_OPTIONS = Object.freeze([
+  'deepseek/deepseek-flash',
+  'mistral/zai-glm-5-3-flash',
+]);
+
 const ROLES = {
   A1: {
     model: 'openai-codex/gpt-6.1-sol',
@@ -57,11 +62,13 @@ const ROLES = {
   },
   B1: {
     model: 'deepseek/deepseek-flash',
+    modelOptions: BACKEND_MODEL_OPTIONS,
     flags: ['--thinking', 'max'],
     system: 'You are B1, the backend author. You have no tools. Return only the requested files.',
   },
   B2: {
     model: 'deepseek/deepseek-flash',
+    modelOptions: BACKEND_MODEL_OPTIONS,
     flags: ['--thinking', 'max'],
     system: 'You are B2, the independent backend reviewer. You have no tools. Return findings only.',
   },
@@ -195,16 +202,21 @@ function bundleHash(files) {
   return hash.digest('hex');
 }
 
-function modelCall(roleName, promptFile, outFile) {
+function modelCall(roleName, promptFile, outFile, modelOverride = null) {
   const role = ROLES[roleName];
   if (!role) fail(`unknown role: ${roleName}`);
+  const model = modelOverride ?? role.model;
+  const allowedModels = role.modelOptions ?? [role.model];
+  if (!allowedModels.includes(model)) {
+    fail('model override not allowed for ' + roleName + ': ' + model + '. Allowed: ' + allowedModels.join(', '));
+  }
   const prompt = resolve(promptFile);
   if (!existsSync(prompt)) fail(`prompt file not found: ${prompt}`);
 
   const args = [
     LAUNCHER,
     '-p',
-    '--model', role.model,
+    '--model', model,
     ...role.flags,
     '--no-tools',
     '--no-mcp',
@@ -263,9 +275,34 @@ function cmdEvent(task, type, actor, message, artifact) {
   console.log(JSON.stringify(event, null, 2));
 }
 
-function cmdAsk(role, promptFile, outFile) {
-  const output = modelCall(role, promptFile, outFile);
+function cmdAsk(role, promptFile, outFile, modelOverride = null) {
+  const output = modelCall(role, promptFile, outFile, modelOverride);
   console.log(`wrote ${outFile} (${output.length} bytes)`);
+}
+
+function parseAskArgs(args) {
+  const positional = [];
+  let modelOverride = null;
+
+  for (let index = 0; index < args.length; index += 1) {
+    const arg = args[index];
+    if (arg === '--model') {
+      if (modelOverride !== null || !args[index + 1] || args[index + 1].startsWith('--')) {
+        fail('usage: ask <role> <promptFile> <outFile> [--model <provider/model>]');
+      }
+      modelOverride = args[index + 1];
+      index += 1;
+    } else if (arg.startsWith('--')) {
+      fail('unknown ask option: ' + arg);
+    } else {
+      positional.push(arg);
+    }
+  }
+
+  if (positional.length !== 3) {
+    fail('usage: ask <role> <promptFile> <outFile> [--model <provider/model>]');
+  }
+  return { role: positional[0], promptFile: positional[1], outFile: positional[2], modelOverride };
 }
 
 function cmdGate(task, kind, packetFile, outFile, bundleFile) {
@@ -407,7 +444,8 @@ if (command === 'init') {
 } else if (command === 'event') {
   cmdEvent(rest[0], rest[1], rest[2], rest[3], rest[4]);
 } else if (command === 'ask') {
-  cmdAsk(rest[0], rest[1], rest[2]);
+  const { role, promptFile, outFile, modelOverride } = parseAskArgs(rest);
+  cmdAsk(role, promptFile, outFile, modelOverride);
 } else if (command === 'gate') {
   const bundleIndex = rest.indexOf('--bundle');
   const bundleFile = bundleIndex >= 0 ? rest[bundleIndex + 1] : null;
@@ -422,6 +460,6 @@ if (command === 'init') {
 } else if (command === 'status') {
   cmdStatus(rest[0]);
 } else {
-  console.error('usage: node factory/host.mjs <init|event|ask|gate|apply|test|status> ...');
+  console.error('usage: node factory/host.mjs <init|event|ask [--model]|gate|apply|test|status> ...');
   process.exit(2);
 }

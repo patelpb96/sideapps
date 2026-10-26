@@ -27,10 +27,12 @@ Two consequences:
 
 | ID | Model | Domain | Default |
 |---|---|---|---|
-| B1 | `deepseek/deepseek-flash`, `--thinking max` | backend | author |
-| B2 | `deepseek/deepseek-flash`, `--thinking max` | backend | reviewer |
+| B1 | default `deepseek/deepseek-flash`, `--thinking max`; optional `mistral/zai-glm-5-3-flash` | backend | author |
+| B2 | default `deepseek/deepseek-flash`, `--thinking max`; optional `mistral/zai-glm-5-3-flash` | backend | reviewer |
 | F1 | `openai-codex/gpt-6-luna` | frontend | author |
 | F2 | `openai-codex/gpt-6-luna` | frontend | reviewer |
+
+The backend host call accepts `--model mistral/zai-glm-5-3-flash` for B1 or B2; omitting it retains the DeepSeek default.
 
 Each is a separate session. The four are peers. They may:
 
@@ -41,7 +43,7 @@ Each is a separate session. The four are peers. They may:
 
 The default for each patch is **one author and a different reviewer**. If both agents contribute code, split it into separate patches so each patch still has an independent reviewer. A reviewer gets the exact diff, the specification, and the test evidence in a fresh context, not the author's private rationale.
 
-Same-model review is a real limitation: B1 and B2 share a model family, as do F1 and F2. The design compensates with deterministic tests, cross-pair contract review, and the rule that readiness needs both frontend ACKs on the same hashes. It does not pretend same-model review is independent verification.
+`deepseek/deepseek-flash` is the default for B1 and B2, and each role can select `mistral/zai-glm-5-3-flash` per call; F1 and F2 use `openai-codex/gpt-6-luna`. When an author and reviewer use the same model family, model diversity is limited. The design compensates with deterministic tests, cross-pair contract review, and the rule that readiness needs both frontend ACKs on the same hashes. It does not treat same-model review as independent verification.
 
 ## 4. Shared board
 
@@ -286,6 +288,5 @@ These are intentionally unresolved until the first supervised pilot:
 
 - Whether the board is a local append-only file, a small service, or a database. Start with the file and one writer.
 - How the host authenticates each agent session. A per-session token issued by the host is enough for a pilot.
-- Whether the backend pair uses one model instance per role or two separate sessions of the same model. Separate sessions are required; the model IDs are the same by design.
 - How much of the readiness evidence is machine-generated vs. attested. Prefer machine-generated hashes plus a short attestation.
-- When to add a second provider for review. The current design accepts same-model review as a known limitation, mitigated by tests and cross-pair ACKs.
+- Whether to require provider diversity for backend reviews. Each role runs in a separate Pi session and can select DeepSeek Flash (default) or Mistral per call, but the host allows both to choose the same provider. Tests and cross-pair ACKs mitigate same-model bias when both keep the default.

@@ -25,10 +25,12 @@ A small program is built by four technical agents, split by domain:
 
 | ID | Model | Domain | Default role |
 |---|---|---|---|
-| **B1** | `deepseek/deepseek-flash` with `--thinking max` | backend | author |
-| **B2** | `deepseek/deepseek-flash` with `--thinking max` | backend | independent reviewer |
+| **B1** | `deepseek/deepseek-flash` with `--thinking max` (default); optional `mistral/zai-glm-5-3-flash` | backend | author |
+| **B2** | `deepseek/deepseek-flash` with `--thinking max` (default); optional `mistral/zai-glm-5-3-flash` | backend | independent reviewer |
 | **F1** | `openai-codex/gpt-6-luna` | frontend | author |
 | **F2** | `openai-codex/gpt-6-luna` | frontend | independent reviewer |
+
+B1 and B2 can select `mistral/zai-glm-5-3-flash` per call with `--model`; omitting the option keeps DeepSeek Flash as the default.
 
 The four are peers. They discuss the contract and the task split on a shared board before anyone writes code. The default for each patch is one author and a different reviewer, but the pair may co-design first; if both write, they split into separate patches so each still gets an independent review.
 

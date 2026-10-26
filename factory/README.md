@@ -18,12 +18,14 @@ What it does not do:
 |---|---|---|
 | A1 | `openai-codex/gpt-6.1-sol --thinking high` | frontier architect, task cards, tests, frontier review |
 | A2 | `openai-codex/gpt-6-sol --thinking high` | frontier lead programmer and integrator |
-| B1 | `deepseek/deepseek-flash --thinking max` | backend author |
-| B2 | `deepseek/deepseek-flash --thinking max` | backend reviewer |
+| B1 | default `deepseek/deepseek-flash` with `--thinking max`; optional `mistral/zai-glm-5-3-flash` | backend author |
+| B2 | default `deepseek/deepseek-flash` with `--thinking max`; optional `mistral/zai-glm-5-3-flash` | backend reviewer |
 | F1 | `openai-codex/gpt-6-luna` | frontend author |
 | F2 | `openai-codex/gpt-6-luna` | frontend reviewer |
 | Astra | `openai-codex/gpt-6-astra` | optional independent code review |
 | Frontier Intelligence | `google/gemini-4-argon` by default (Argon) | permission gate |
+
+For either backend role, pass `--model mistral/zai-glm-5-3-flash` to `ask` to select the optional model. The host rejects models not listed for that role.
 
 All calls use `--no-tools --no-mcp --no-session --no-extensions
 --no-context-files`. Prompts are passed as `@file` so long packets do not hit

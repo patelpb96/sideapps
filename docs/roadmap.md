@@ -76,7 +76,7 @@ Run one small program end to end with a human watching:
 
 Only after the pilot:
 
-- consider a second provider for review where same-model bias matters;
+- decide whether backend review should require a different provider; Mistral is now an optional choice alongside the DeepSeek default;
 - add a bounded retry policy and a spend meter;
 - add a dashboard for open tasks, gates, and invalidations;
 - decide whether the board stays a local file or becomes a service;

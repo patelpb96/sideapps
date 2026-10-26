@@ -6,8 +6,8 @@ Read this before touching anything. This repository contains a **V1 supervised b
 
 In **Grunt Team mode**, there are exactly four technical agents:
 
-- **B1** — `deepseek/deepseek-flash --thinking max`, backend author.
-- **B2** — `deepseek/deepseek-flash --thinking max`, backend reviewer.
+- **B1** — `deepseek/deepseek-flash` with `--thinking max` (default); optional `mistral/zai-glm-5-3-flash`, backend author.
+- **B2** — `deepseek/deepseek-flash` with `--thinking max` (default); optional `mistral/zai-glm-5-3-flash`, backend reviewer.
 - **F1** — `openai-codex/gpt-6-luna`, frontend author.
 - **F2** — `openai-codex/gpt-6-luna`, frontend reviewer.
 

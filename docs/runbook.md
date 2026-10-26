@@ -56,7 +56,9 @@ State the blast radius explicitly in the evidence. The guard deterministically d
 
 Each agent is a separate `pi -p` process with no tools, no session, no extensions, and no context files. Paste the relevant snapshot into the prompt. The smallest prompt is the safest prompt.
 
-### B1 / B2 — backend, DeepSeek Flash at max thinking
+### B1 / B2 — backend, DeepSeek Flash default, Mistral option
+
+For a host call, add `--model mistral/zai-glm-5-3-flash` to select it for either role. The host validates model choices per role; omitting the flag keeps the DeepSeek default. In the raw Pi command below, replace the `--model` value to use the same option.
 
 ```bash
 pi -p --model deepseek/deepseek-flash --thinking max \
